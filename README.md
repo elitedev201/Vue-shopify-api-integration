@@ -1,4 +1,4 @@
-# tacoma_consignment_system
+# tacoma-consignment-system
 
 ## Project setup
 ```
