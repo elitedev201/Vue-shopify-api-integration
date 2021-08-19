@@ -26,11 +26,7 @@
           {{ event.category }}
         </p>
         <div class="event-images columns is-multiline has-text-centered">
-          <div
-            v-for="image in event.images"
-            :key="image.id"
-            class="column is-one-third"
-          >
+          <div v-for="image in event.images" :key="image.id" class="column is-one-third">
             <img :src="`${image}`" :alt="`${event.name}`" />
           </div>
         </div>
@@ -39,33 +35,33 @@
   </div>
 </template>
 <script>
-import EventService from "@/services/EventService.js"
+// import EventService
+import EventService from '@/services/EventService.js';
 export default {
-  name: "EventSingle",
+  name: 'EventSingle',
   data() {
-    // NEW - initialize the event object
+    // initialize the event object
     return {
-      event: {},
+      event: {}
     }
   },
   created() {
-    this.getEventData() // NEW - call getEventData() when the instance is created
+    
+    this.getEventData();
   },
-
   methods: {
     async getEventData() {
       // Get the access token from the auth wrapper
       const accessToken = await this.$auth.getTokenSilently()
 
-      console.log(accessToken);
-
       // Use the eventService to call the getEventSingle method
-      EventService.getEventSingle(this.$route.params.id, accessToken).then(
+      EventService.getEventSingle(this.$route.params.id, accessToken)
+      .then(
         (event => {
-          this.$set(this, "event", event)
+          this.$set(this, "event", event);
         }).bind(this)
-      )
-    },
-  },
+      );
+    }
+  }
 }
 </script>

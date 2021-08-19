@@ -12,7 +12,7 @@
 </template>
 <script>
 import EventCard from "@/components/EventCard";
-import EventService from '@/services/EventService.js'; // NEW
+import EventService from '@/services/EventService.js';
 export default {
   name: "EventsList",
   components: {
@@ -25,12 +25,11 @@ export default {
     };
   },
   created() {
-    this.getEventsData(); // NEW - call getEventData() when the instance is created
+    this.getEventsData(); // call getEventData() when the instance is created
   },
-  // NEW
   methods: {
     async getEventsData() {
-      // NEW - Use the eventService to call the getEvents() method
+      // Use the eventService to call the getEvents() method
       EventService.getEvents()
       .then(
         (events => {
@@ -41,3 +40,9 @@ export default {
   }
 };
 </script>
+<style lang="scss" scoped>
+.events {
+  margin-top: 100px;
+  text-align: center;
+}
+</style>
