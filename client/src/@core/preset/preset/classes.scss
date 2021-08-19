@@ -1,0 +1,587 @@
+@import './mixins';
+@import '~vuetify/src/styles/styles.sass';
+
+// ————————————————————————————————————
+//* ——— Color
+// ————————————————————————————————————
+
+.bg-gradient-primary {
+  background: linear-gradient(98deg, #c48eff, var(--v-primary-base) 94%);
+}
+
+@include theme--child(bg-card) using ($material) {
+  background-color: map-deep-get($material, 'cards');
+}
+
+@include theme--child(bg-body) using ($material) {
+  background-color: map-deep-get($material, 'background');
+}
+
+.bg-blur {
+  backdrop-filter: blur(8px);
+
+  @at-root {
+    @include theme(bg-blur) using ($material) {
+      background-color: rgba(map-deep-get($material, 'cards'), 0.85) !important;
+    }
+  }
+}
+
+// ————————————————————————————————————
+//* ——— Layout
+// ————————————————————————————————————
+
+// #region `max-h-content-container` class
+.vertical-nav {
+  // Set height for contents like apps to don't increase the height for longer content and stick to fixed height
+  // ? We have 3 style tag because of responsiveness
+  .v-main {
+    // If AppBar & Footer is present
+    &[style='padding: 64px 0px 56px 260px;'],
+    &[style='padding: 64px 0px 56px 68px;'], // collapsed
+    &[style='padding: 64px 260px 56px 0px;'], // RTL
+    &[style='padding: 64px 68px 56px 0px;'], // RTL Collapsed
+    &[style='padding: 64px 0px 56px;'] {
+      .max-h-content-container {
+        height: calc((var(--vh, 1vh) * 100) - 64px - 56px - (1.5rem * 2));
+      }
+    }
+    &[style='padding: 56px 0px;'] {
+      .max-h-content-container {
+        height: calc((var(--vh, 1vh) * 100) - (56px * 2) - (1.5rem * 2));
+      }
+    }
+    // If AppBar is present and Footer is not present
+    &[style='padding: 64px 0px 0px 260px;'],
+    &[style='padding: 64px 0px 0px 68px;'], // collapsed
+    &[style='padding: 64px 260px 0px 0px;'], // RTL
+    &[style='padding: 64px 68px 0px 0px;'], // RTL Collapsed
+    &[style='padding: 64px 0px 0px;'],
+    &[style='padding: 56px 0px 0px;'] {
+      .max-h-content-container {
+        height: calc((var(--vh, 1vh) * 100) - 56px - (1.5rem * 2));
+      }
+    }
+    // If AppBar is not present and Footer is present
+    &[style='padding: 0px 0px 56px 260px;'],
+    &[style='padding: 0px 0px 56px 68px;'], // collapsed
+    &[style='padding: 0px 260px 56px 0px;'], // RTL
+    &[style='padding: 0px 68px 56px 0px;'], // RTL Collapsed
+    &[style='padding: 0px 0px 56px;'] {
+      .max-h-content-container {
+        height: calc((var(--vh, 1vh) * 100) - 56px - (1.5rem * 2));
+      }
+    }
+    // If AppBar & footer both are not present
+    &[style='padding: 0px 0px 0px 260px;'],
+    &[style='padding: 0px 0px 0px 68px;'], // collapsed
+    &[style='padding: 0px 260px 0px 0px;'], // RTL
+    &[style='padding: 0px 68px 0px 0px;'], // RTL collapsed
+    &[style='padding: 0px;'] {
+      .max-h-content-container {
+        height: calc((var(--vh, 1vh) * 100) - (1.5rem * 2));
+      }
+    }
+  }
+}
+
+.horizontal-nav {
+  // Set height for contents like apps to don't increase the height for longer content and stick to fixed height
+  .v-main {
+    // If AppBar+SystemBar & Footer are present
+    &[style='padding: 128px 0px 48px;'] {
+      .max-h-content-container {
+        height: calc((var(--vh, 1vh) * 100) - 128px - 48px - (1.5rem * 2));
+      }
+    }
+    // If AppBar+SystemBar are present & Footer is not present
+    &[style='padding: 128px 0px 0px;'] {
+      .max-h-content-container {
+        height: calc((var(--vh, 1vh) * 100) - 128px - (1.5rem * 2));
+      }
+    }
+  }
+}
+// #endregion
+
+// ————————————————————————————————————
+//* ——— Grid
+// ————————————————————————————————————
+
+// Card match height
+.row.match-height {
+  .v-card {
+    height: 100%;
+  }
+}
+
+// Removes large space when form is used with validation
+.multi-col-validation {
+  &.v-form {
+    .v-text-field__details {
+      margin-bottom: 0 !important;
+      min-height: unset;
+
+      .v-messages:not([role='alert']) {
+        min-height: unset;
+        .v-messages__wrapper {
+          min-height: unset;
+        }
+      }
+    }
+  }
+}
+
+// ————————————————————————————————————
+//* ——— Typography
+// ————————————————————————————————————
+
+//
+//* ——— Font Sizes ——————————————————
+//
+
+// According to TailwindCSS
+$font-sizes: (
+  '.text-xs': (
+    'font-size': 0.75rem,
+    'line-height': 1rem,
+  ),
+  '.text-sm': (
+    'font-size': 0.875rem,
+    'line-height': 1.25rem,
+  ),
+  '.text-base': (
+    'font-size': 1rem,
+    'line-height': 1.5rem,
+  ),
+  '.text-lg': (
+    'font-size': 1.125rem,
+    'line-height': 1.75rem,
+  ),
+  '.text-xl': (
+    'font-size': 1.25rem,
+    'line-height': 1.75rem,
+  ),
+  '.text-2xl': (
+    'font-size': 1.5rem,
+    'line-height': 2rem,
+  ),
+  '.text-3xl': (
+    'font-size': 1.875rem,
+    'line-height': 2.25rem,
+  ),
+  '.text-4xl': (
+    'font-size': 2.25rem,
+    'line-height': 2.5rem,
+  ),
+  '.text-5xl': (
+    'font-size': 3rem,
+    'line-height': 1,
+  ),
+);
+/* 'text-6xl': ( 'font-size': 3.75rem, 'line-height': 1 ),
+    'text-7xl': ( 'font-size': 4.5rem, 'line-height': 1 ),
+    'text-8xl': ( 'font-size': 6rem, 'line-height': 1 ),
+    'text-9xl': ( 'font-size': 8rem, 'line-height': 1 ),
+  */
+
+@include class-generator($font-sizes, $important: true);
+
+//
+//* ——— Font Size ——————————————————
+//
+
+.font-weight-semibold {
+  font-weight: 600 !important;
+}
+
+// ————————————————————————————————————
+//* ——— Components
+// ————————————————————————————————————
+
+//
+//* ——— Avatar ——————————————————
+//
+
+// For creating initial avatars
+@include light-bg-provider(v-avatar);
+
+// ——— Avatar Group ——————— //
+
+.v-avatar-group {
+  display: flex;
+  align-items: center;
+  > * {
+    &:not(:first-child) {
+      @include ltr() {
+        margin-left: -0.8rem;
+      }
+      @include rtl() {
+        margin-right: -0.8rem;
+      }
+    }
+    transition: transform 0.25s ease, box-shadow 0.15s ease;
+
+    &:hover {
+      transform: translateY(-5px) scale(1.05);
+      z-index: 2;
+      // @include elevation(2);
+    }
+  }
+}
+
+@include app-elevation('v-avatar-group > *:hover', 2);
+
+@include theme(v-avatar-group) using ($material) {
+  > .v-avatar {
+    border: 2px solid map-deep-get($material, 'cards');
+  }
+}
+
+@include theme--child(v-avatar) using ($material) {
+  &.bordered {
+    border: 2px solid map-deep-get($material, 'cards');
+  }
+}
+
+//
+//* ——— Card ——————————————————
+//
+
+// ? We have to use various selectors because `!important` isn't working
+.v-application[class*='theme'] {
+  .v-card-transparent-outlined {
+    &.v-card.v-sheet:not(.v-card---outlined) {
+      background-color: transparent !important;
+      box-shadow: none !important;
+    }
+  }
+}
+
+@include theme(v-card-transparent-outlined) using ($material) {
+  &.v-card {
+    border: thin solid map-deep-get($material, 'dividers');
+  }
+}
+
+//
+//* ——— Chip ——————————————————
+//
+
+// For creating initial avatars
+@include light-bg-provider(v-chip);
+.v-chip-light-bg {
+  font-weight: 500;
+}
+
+//
+//* ——— Stepper ——————————————————
+//
+
+// ? Handle error state
+.v-stepper.custom-header {
+  .v-stepper__step.error--text {
+    .v-stepper__step__step {
+      background-color: var(--v-error-base);
+
+      svg {
+        display: none;
+      }
+    }
+  }
+}
+
+.v-stepper {
+  &.custom-header {
+    .v-stepper__step {
+      &:not(.v-stepper__step--active):not(.v-stepper__step--complete):not(.v-stepper__step--error) {
+        .v-stepper__step__step {
+          background: var(--v-primary-base) !important;
+          opacity: 0.12;
+        }
+      }
+    }
+  }
+}
+
+@include app-elevation('custom-header.v-stepper .v-stepper__step.v-stepper__step--active .v-stepper__step__step', 2);
+
+// ? Set inner circle color of inactive step dark compatible
+@include theme('custom-header.v-stepper .v-stepper__step.v-stepper__step--inactive .v-stepper__step__step::after') using
+  ($material) {
+  background-color: map-deep-get($material, 'cards');
+}
+
+.custom-header {
+  &.v-stepper {
+    // ? Disable text-shadow from Vuetify
+    .v-stepper__step--active .v-stepper__label {
+      text-shadow: none !important;
+    }
+
+    // ? Update divider height/border-width
+    .v-divider {
+      border-width: 3px;
+      position: relative;
+      border-radius: 6px;
+
+      &::after {
+        content: '';
+        display: block;
+        height: 6px;
+        width: 100%;
+        background: var(--v-primary-base);
+        width: 0;
+        transition: all 0.1s ease-in-out;
+        position: absolute;
+        top: -3px;
+        left: -2%;
+        border-radius: 6px;
+      }
+    }
+
+    // Update divider color if previous step is completed
+    .v-stepper__step.v-stepper__step--complete {
+      + .v-divider {
+        // background: var(--v-primary-base);
+        &::after {
+          width: 104%;
+        }
+      }
+    }
+
+    .v-stepper__step {
+      .v-stepper__step__step {
+        position: relative;
+        transform: scale(0.9);
+      }
+
+      &.v-stepper__step--complete {
+        .v-icon__svg {
+          font-size: 18px;
+          height: 18px;
+          width: 18px;
+        }
+      }
+
+      &.v-stepper__step--active {
+        .v-stepper__step__step {
+          transform: scale(0.8);
+
+          &::after {
+            content: '';
+            display: block;
+            background: white;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            transform: scale(0.5);
+          }
+        }
+      }
+
+      &.v-stepper__step--inactive {
+        .v-stepper__step__step {
+          transform: scale(0.8);
+
+          &::after {
+            content: '';
+            display: block;
+            // background: #fff;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            transform: scale(0.75);
+          }
+        }
+      }
+    }
+  }
+}
+
+//
+//* ——— Timeline ——————————————————
+//
+
+.timeline-custom-dense {
+  padding-top: 0 !important;
+
+  .v-timeline-item {
+    justify-content: flex-end;
+  }
+  .v-timeline-item__body {
+    max-width: unset !important;
+  }
+  .v-timeline-item__divider {
+    min-width: unset;
+    @include ltr() {
+      margin-right: 1rem;
+    }
+
+    @include rtl() {
+      margin-left: 1rem;
+    }
+  }
+  &:not(.v-timeline--reverse):before {
+    @include ltr() {
+      left: 11px !important;
+    }
+    @include rtl() {
+      right: 11px !important;
+    }
+  }
+}
+
+// @include app-elevation('v-timeline.timeline-custom-dots .v-timeline-item__inner-dot', 1, true);
+@include theme(v-timeline) using ($material) {
+  &.v-timeline.timeline-custom-dots.card-content {
+    .v-card__text {
+      background-color: map-deep-get($material, 'cards');
+      border: thin solid map-deep-get($material, 'dividers');
+    }
+  }
+}
+.v-timeline.timeline-custom-dots {
+  .v-timeline-item__divider {
+    align-items: flex-start;
+  }
+
+  .v-timeline-item__dot {
+    box-shadow: none !important;
+    position: relative;
+  }
+  .v-timeline-item__inner-dot {
+    height: 12px;
+    margin: 6px;
+    width: 12px;
+
+    // Box shadow of dots
+    @include themeable() using ($color, $value) {
+      &.#{$color} {
+        &::before {
+          background-color: $value;
+          border-radius: inherit;
+          bottom: 0;
+          content: '';
+          left: 0;
+          opacity: 0.12;
+          position: absolute;
+          pointer-events: none;
+          right: 0;
+          top: 0;
+          transform: scale(0.8);
+        }
+      }
+    }
+  }
+
+  &.card-content {
+    .v-timeline-item .v-timeline-item__body > .v-card:before,
+    .v-timeline-item .v-timeline-item__body .v-card:after {
+      top: 15px;
+    }
+
+    .v-timeline-item__dot {
+      margin-top: 13px;
+    }
+
+    .v-card__title {
+      padding: 12px;
+    }
+  }
+}
+
+.v-timeline {
+  &.no-dots-shadow {
+    .v-timeline-item__dot {
+      box-shadow: none !important;
+    }
+  }
+}
+
+// ————————————————————————————————————
+//* ——— Misc
+// ————————————————————————————————————
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.position-relative {
+  position: relative;
+}
+
+.position-absolute {
+  position: absolute;
+}
+
+.w-full {
+  width: 100%;
+}
+
+.h-full {
+  height: 100%;
+}
+
+.drawer-header {
+  padding: 0.75rem 1.25rem;
+
+  @at-root {
+    @include theme(v-navigation-drawer) using ($material) {
+      .drawer-header {
+        background-color: rgba(map-deep-get($material, 'primary-shade'), 0.04);
+      }
+    }
+  }
+}
+
+// ————————————————————————————————————
+//* ——— Table
+// ————————————————————————————————————
+.table-rounded {
+  &.v-data-table {
+    thead {
+      tr {
+        th {
+          border-top: 0;
+        }
+        th {
+          &:first-child {
+            border-top-left-radius: 6px;
+          }
+          &:last-child {
+            border-top-right-radius: 6px;
+          }
+        }
+      }
+    }
+  }
+}
+
+// ————————————————————————————————————
+//* ——— Badge
+// ————————————————————————————————————
+
+.number-badge {
+  .v-badge__badge {
+    height: 20px;
+    width: auto;
+    padding: 4px 6px;
+    font-size: 12px;
+    font-weight: 600;
+  }
+}
+
+@include light-bg-provider(v-badge, '.v-badge__badge');
+.v-badge-light-bg {
+  font-weight: 500;
+  .v-badge__badge {
+    color: inherit;
+  }
+}

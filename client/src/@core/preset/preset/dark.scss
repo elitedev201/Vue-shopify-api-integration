@@ -1,0 +1,91 @@
+@import './mixins';
+
+// ? This includes dark theme related style
+.v-application {
+  &.theme--dark {
+    @at-root {
+      .v-alert {
+        &.v-sheet.theme--dark {
+          &:not([class*='--text']) {
+            color: #fff !important;
+            svg {
+              color: #fff !important;
+            }
+          }
+        }
+      }
+    }
+
+    // knowledge base page
+    #knowledge-base {
+      .knowledge-base-bg {
+        background-image: url('../../../assets/images/misc/knowledge-base-bg-dark.png') !important;
+      }
+
+      .kb-search-input {
+        background-color: map-get($material-dark, 'cards');
+      }
+
+      // kb-character-wrapper bg
+      .kb-character-wrapper {
+        background: rgba(231, 227, 252, 0.08);
+      }
+
+      // category
+      .kbc-title {
+        background-color: rgba(231, 227, 252, 0.08);
+      }
+    }
+
+    // faq
+
+    #faq {
+      .faq-bg {
+        background-image: url('../../../assets/images/misc/knowledge-base-bg-dark.png') !important;
+      }
+
+      .faq-search-input {
+        background-color: map-get($material-dark, 'cards');
+      }
+    }
+
+    // ————————————————————————————————————
+    //* ——— Data table
+    // ————————————————————————————————————
+    .v-data-table {
+      th {
+        font-weight: 600;
+        background-color: #3b355a !important;
+      }
+    }
+
+    // ————————————————————————————————————
+    //* ——— Prism Code Blocks
+    // ————————————————————————————————————
+
+    code[class*='language-'],
+    pre[class*='language-'] {
+      background: none !important;
+    }
+
+    *:not(pre) > code[class*='language-'],
+    pre[class*='language-'] {
+      background: map-deep-get($material-dark, 'background') !important;
+    }
+  }
+}
+
+// ————————————————————————————————————
+//* ——— Perfect Scrollbar
+// ————————————————————————————————————
+
+.v-application.theme--dark {
+  .ps__rail-y,
+  .ps__rail-x {
+    background-color: transparent !important;
+  }
+
+  .ps__thumb-y {
+    background-color: map-deep-get($material-dark, 'cards');
+  }
+}

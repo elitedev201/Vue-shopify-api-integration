@@ -1,0 +1,176 @@
+@import '~@core/preset/preset/mixins.scss';
+@import '~@core/preset/preset/variables.scss';
+@import '~vuetify/src/components/VCalendar/_variables.scss';
+
+.app-calendar {
+  .v-calendar {
+    height: calc(100% - 58px);
+  }
+
+  //
+  //* ——— Current Day ——————————————————
+  //
+
+  // Set background color of active date button (circle) to transparent
+  .v-calendar-weekly__day.v-present {
+    // Change the background color of current day [month view]
+    @at-root {
+      @include theme(app-calendar) using ($material) {
+        .v-calendar-weekly__day.v-present {
+          background-color: rgba(map-deep-get($material, 'primary-shade'), 0.04);
+        }
+      }
+    }
+
+    .v-btn.v-btn--has-bg {
+      background-color: transparent;
+    }
+  }
+
+  //
+  //* ——— Week Head ——————————————————
+  //
+
+  .v-calendar-weekly__head {
+    @at-root {
+      @include theme(app-calendar) using ($material) {
+        .v-calendar-weekly__head {
+          border-bottom: $calendar-line-width solid map-deep-get($material, 'calendar', 'line-color');
+        }
+      }
+    }
+
+    .v-calendar-weekly__head-weekday {
+      font-size: 14px;
+      font-weight: 600;
+
+      padding-top: 7px;
+      padding-bottom: 7px;
+
+      border-right: none !important;
+      text-transform: none;
+
+      @at-root {
+        @include theme(app-calendar) using ($material) {
+          .v-calendar-weekly__head {
+            .v-calendar-weekly__head-weekday {
+              color: map-deep-get($material, 'text', 'primary') !important;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  //
+  //* ——— Daily Head ——————————————————
+  //
+
+  .v-calendar-daily__head {
+    .v-calendar-daily_head-weekday {
+      font-size: 14px;
+      font-weight: 600;
+
+      padding-top: 7px;
+      padding-bottom: 7px;
+
+      border-right: none !important;
+      text-transform: none;
+
+      @at-root {
+        @include theme(app-calendar) using ($material) {
+          .v-calendar-daily__head {
+            .v-calendar-daily_head-weekday {
+              color: map-deep-get($material, 'text', 'primary') !important;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .v-calendar-daily__body {
+    .v-calendar-daily__interval-text {
+      font-weight: 600;
+    }
+  }
+  @at-root {
+    @include theme(app-calendar) using ($material) {
+      .v-calendar-daily__body {
+        .v-calendar-daily__interval-text {
+          color: map-deep-get($material, 'text', 'secondary') !important;
+        }
+      }
+    }
+  }
+
+  //
+  //* ——— Week ——————————————————
+  //
+
+  .v-calendar-weekly__week {
+    .v-calendar-weekly__day .v-past {
+      @at-root {
+        @include theme(app-calendar) using ($material) {
+          .v-calendar-weekly__week {
+            // Muted text for dates outside of current month
+            .v-calendar-weekly__day.v-outside {
+              .v-btn {
+                color: map-deep-get($material, 'text', 'disabled');
+              }
+
+              // border-right: $calendar-line-width solid map-deep-get($material, 'calendar', 'line-color') !important;
+            }
+          }
+        }
+      }
+    }
+
+    .v-calendar-weekly__day {
+      // padding-left: 8px;
+    }
+
+    .v-calendar-weekly__day-label {
+      // Left align date button
+      text-align: left;
+
+      .v-btn {
+        // Set font size of visible dates
+        font-size: 14px;
+
+        // Add some margin on left as button is aligned to left now
+        @include ltr() {
+          margin-left: 4px;
+        }
+        @include rtl() {
+          margin-right: 4px;
+        }
+      }
+    }
+  }
+
+  //
+  //* ——— Event ——————————————————
+  //
+
+  .v-event {
+    @include ltr() {
+      transform: translateX(3px);
+    }
+    @include rtl() {
+      transform: translateX(-3px);
+    }
+
+    > div {
+      @include ltr() {
+        padding-left: 8px !important;
+      }
+      @include rtl() {
+        padding-right: 8px !important;
+      }
+      width: calc(100% - 8px);
+      overflow: hidden;
+      font-weight: 600;
+    }
+  }
+}

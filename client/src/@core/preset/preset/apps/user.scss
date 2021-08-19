@@ -1,0 +1,58 @@
+@import '../mixins.scss';
+@import '../variables.scss';
+
+#user-list {
+  .user-search {
+    max-width: 200px;
+  }
+}
+
+// user view
+#user-view {
+  .user-tabs {
+    &.v-tabs:not(.v-tabs--vertical) {
+      box-shadow: none !important;
+      .v-tabs-bar {
+        background-color: transparent !important;
+      }
+    }
+  }
+
+  // tab content
+  #user-tabs-content {
+    background-color: transparent;
+  }
+
+  // bio panel
+  .user-bio-panel {
+    .user-plan {
+      border: 2px solid var(--v-primary-base) !important;
+    }
+  }
+
+  // billing plan
+  .user-tab-billings-plans {
+    .billing-address-table {
+      width: 95%;
+      .billing-title {
+        width: 148px;
+      }
+    }
+  }
+}
+
+// user upgrade plan dialog
+.user-pricing {
+  sup {
+    top: -1.5rem;
+    font-size: 0.8rem;
+  }
+  sub {
+    top: -0.2rem;
+  }
+}
+@include theme--child(user-tabs) using ($material) {
+  &.v-tabs:not(.v-tabs--vertical) {
+    border-bottom: thin solid map-get($material, 'dividers');
+  }
+}

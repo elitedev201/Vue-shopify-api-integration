@@ -1,0 +1,22 @@
+{
+    "compilerOptions": {
+        "baseUrl": ".",
+        "paths": {
+            "@/*": [
+                "src/*"
+            ],
+            "@core/*": [
+                "src/@core/*"
+            ],
+            "@themeConfig": [
+                "themeConfig.js"
+            ],
+            "@axios": [
+                "src/plugins/axios.js"
+            ],
+            "@user-variables": [
+                "src/styles/variables.scss"
+            ]
+        }
+    }
+}

@@ -1,0 +1,107 @@
+@import '../mixins';
+
+// @mixin remove-shadow-add-border($component, $border-property: 'border') {
+//   .#{$component} {
+//     box-shadow: none !important;
+//   }
+
+//   @include theme($component) using ($material) {
+//     #{$border-property}: 1px solid rgba(map-deep-get($material, 'primary-shade'), 0.22);
+//   }
+// }
+
+// .v-application.skin-variant--bordered {
+//   @include remove-shadow-add-border('v-card:not(.v-card .v-card)');
+//   @include remove-shadow-add-border('v-app-bar--fixed.v-app-bar--is-scrolled');
+//   @include remove-shadow-add-border('v-footer.v-footer--fixed:not(.v-sheet--outlined)');
+//   @include remove-shadow-add-border(v-menu__content);
+//   @include remove-shadow-add-border(v-stepper);
+//   @include remove-shadow-add-border('v-tabs:not(.v-tab--vertical)', 'border-bottom');
+// }
+
+// ————————————————————————————————————
+//* ——— Bordered Mixin
+// ————————————————————————————————————
+
+@mixin remove-shadow-add-border($component, $border-property: 'border', $important: false) {
+  .#{$component} {
+    box-shadow: none !important;
+  }
+
+  @include theme($component) using ($material) {
+    #{$border-property}: 1px solid rgba(map-deep-get($material, 'primary-shade'), 0.22) if($important, !important, null);
+  }
+}
+
+// ————————————————————————————————————
+//* ——— Horizontal Nav Specific Styles
+// ————————————————————————————————————
+
+.v-application.skin-variant--bordered.horizontal-nav {
+  @include remove-shadow-add-border('navigation-menu', 'border-bottom');
+  @include remove-shadow-add-border('v-app-bar--fixed.v-app-bar--is-scrolled', 'border-bottom');
+
+  // Remove v-menu__content border from nav items
+  .horizontal-nav-menu {
+    > .v-menu > .v-menu__content {
+      border: none !important;
+
+      .v-list {
+        box-shadow: none !important;
+      }
+    }
+  }
+  @include remove-shadow-add-border('horizontal-nav-menu > .v-menu > .v-menu__content > .v-list');
+}
+
+// ————————————————————————————————————
+//* ——— Vertical Nav Specific Styles
+// ————————————————————————————————————
+.v-application.skin-variant--bordered.vertical-nav {
+  @include remove-shadow-add-border('v-app-bar--fixed.v-app-bar--is-scrolled');
+  .v-app-bar {
+    border: 1px solid transparent;
+  }
+
+  .ps-nav-menu-items {
+    @include theme(v-subheader) using ($material) {
+      span {
+        background: map-deep-get($material, 'cards');
+      }
+    }
+  }
+}
+
+@include theme('skin-variant--bordered.vertical-nav') using ($material) {
+  .vertical-nav-menu-container {
+    .shadow-bottom {
+      background: linear-gradient(
+        map-deep-get($material, 'cards') 40%,
+        rgba(map-deep-get($material, 'cards'), 0.1) 95%,
+        rgba(map-deep-get($material, 'cards'), 0.05)
+      );
+    }
+  }
+}
+
+// ————————————————————————————————————
+//* ——— Bordered Styles
+// ————————————————————————————————————
+
+.v-application.skin-variant--bordered {
+  @include remove-shadow-add-border('v-card:not(.v-card .v-card)');
+  @include remove-shadow-add-border(v-menu__content);
+  @include remove-shadow-add-border(v-stepper);
+  @include remove-shadow-add-border('v-tabs:not(.v-tab--vertical)', 'border-bottom');
+  @include remove-shadow-add-border('v-footer.v-footer--fixed:not(.v-sheet--outlined)');
+
+  @at-root {
+    @include theme('v-application.skin-variant--bordered .v-application--wrap') using ($material) {
+      background: map-deep-get($material, 'cards');
+    }
+    @include theme('v-application.skin-variant--bordered .app-navigation-menu') using ($material) {
+      background: map-deep-get($material, 'cards');
+      border-right: 1px solid rgba(map-deep-get($material, 'primary-shade'), 0.22);
+    }
+  }
+}

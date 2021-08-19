@@ -1,0 +1,48 @@
+$nav-menu-bg-color: #1f1d31;
+
+@mixin semi-dark--bg($component, $white-opacity: 0.76, $style: 'all') {
+  .#{$component} {
+    @if ($style == 'all' or $style == 'background') {
+      background: $nav-menu-bg-color;
+    }
+    @if ($style == 'all' or $style == 'color') {
+      color: rgba(#fff, $white-opacity) !important;
+    }
+  }
+}
+
+.v-application.skin-variant--semi-dark {
+  @include semi-dark--bg(app-navigation-menu);
+
+  //   Style App Title
+  @include semi-dark--bg('app-navigation-menu .app-title.text--primary', $white-opacity: 1, $style: 'color');
+
+  //   Style all lists
+  @include semi-dark--bg('app-navigation-menu .v-list-item', $style: 'color');
+
+  //   Style all icons inside nav menu
+  @include semi-dark--bg('app-navigation-menu  .v-icon', $style: 'color');
+
+  //   Style all list titles
+  @include semi-dark--bg('app-navigation-menu .v-list-item .v-list-item__title', $style: 'color');
+
+  //   Style active list item item
+  @include semi-dark--bg(
+    'app-navigation-menu .v-list-item .v-list-item__title.white--text',
+    $white-opacity: 0.87,
+    $style: 'color'
+  );
+
+  //   Style nav menu section title
+  @include semi-dark--bg('app-navigation-menu .v-subheader .title-wrapper span');
+
+  .vertical-nav-menu-container {
+    .shadow-bottom {
+      background: linear-gradient(
+        $nav-menu-bg-color 40%,
+        rgba($nav-menu-bg-color, 0.1) 95%,
+        rgba($nav-menu-bg-color, 0.05)
+      );
+    }
+  }
+}

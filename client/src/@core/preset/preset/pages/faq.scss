@@ -1,0 +1,29 @@
+// Mixins
+@import '~@core/preset/preset/mixins.scss';
+
+#faq {
+  .faq-bg {
+    padding: 5.5rem;
+    background-image: url('../../../assets/images/misc/knowledge-base-bg-light.png');
+    background-size: cover;
+  }
+
+  // search input
+  .faq-search-input {
+    max-width: 28.125rem;
+    background-color: map-get($shades, 'white');
+    border-radius: 5px;
+  }
+}
+
+@media (max-width: 600px) {
+  #faq {
+    .faq-bg {
+      padding: 1.5rem !important;
+    }
+  }
+}
+
+@include theme--child(faq-contact) using ($material) {
+  background-color: map-deep-get($material, 'table', 'hover');
+}

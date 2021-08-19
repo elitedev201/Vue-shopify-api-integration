@@ -1,0 +1,56 @@
+@import '~@core/preset/preset/variables.scss';
+
+#knowledge-base {
+  .knowledge-base-bg {
+    padding: 5.5rem;
+    background-image: url('../../../assets/images/misc/knowledge-base-bg-light.png');
+    background-size: cover;
+  }
+
+  // search input
+  .kb-search-input {
+    max-width: 28.125rem;
+    background-color: map-get($shades, 'white');
+    border-radius: 5px;
+  }
+
+  // kb-character-wrapper bg
+  .kb-character-wrapper {
+    position: relative;
+    height: 12.5rem;
+    background: #fafafa;
+    padding-top: 1.438rem;
+
+    .v-image {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+    }
+  }
+
+  // category
+  .kbc-title {
+    background-color: rgba(94, 86, 105, 0.08);
+  }
+
+  // knowledge base category link color changed
+  .kb-questions {
+    .kb-question {
+      &:hover,
+      &:focus {
+        span {
+          color: var(--v-primary-base) !important;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  #knowledge-base {
+    .knowledge-base-bg {
+      padding: 1.5rem !important;
+    }
+  }
+}

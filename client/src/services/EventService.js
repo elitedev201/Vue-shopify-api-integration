@@ -6,7 +6,7 @@ export default {
     return res.data;
   },
   async getEventSingle(eventId, accessToken) {
-    console.log(accessToken);
+
     let res = await axios.get("http://localhost:8000/events/" + eventId, {
         headers: {
             Authorization: `Bearer ${accessToken}`

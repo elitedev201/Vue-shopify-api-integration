@@ -1,0 +1,8 @@
+// Content
+$content-max-width: 1440px;
+$content-padding-vertical-navigation-menu: 1.5rem;
+$content-padding-horizontal-navigation-menu: $content-padding-vertical-navigation-menu;
+$boxed-content-padding-horizontal-navigation-menu: 1.5rem 3rem;
+
+// User overrides
+@import '~@/styles/variables';

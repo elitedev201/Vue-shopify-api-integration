@@ -1,0 +1,35 @@
+@import '~vuetify/src/styles/styles.sass';
+@import '~@core/preset/preset/mixins.scss';
+
+.app-invoice-preview {
+  .payment-details-header {
+    margin-bottom: 0.813rem;
+  }
+
+  @include theme(header-inputs) using ($material) {
+    &.v-input--is-disabled {
+      background-color: rgba(map-deep-get($material, 'primary-shade'), 0.04);
+    }
+  }
+
+  .purchased-items-table {
+    th {
+      background-color: transparent !important;
+    }
+
+    @at-root {
+      @include theme--child(v-data-table) using ($material) {
+        &.purchased-items-table {
+          > .v-data-table__wrapper > table > tbody > tr:last-child > td:not(.v-data-table__mobile-row),
+          > .v-data-table__wrapper > table > tbody > tr:last-child > th:not(.v-data-table__mobile-row) {
+            border-bottom: thin solid rgba(map-deep-get($material, 'primary-shade'), 0.14);
+          }
+        }
+      }
+    }
+  }
+
+  .select-invoice-to {
+    width: 14rem;
+  }
+}

@@ -1,0 +1,142 @@
+@import '~@core/preset/preset/mixins.scss';
+@import '~vuetify/src/styles/styles.sass';
+
+.app-chat {
+  .user-status-badge {
+    &.v-badge--bordered .v-badge__badge {
+      height: 12px !important;
+      width: 12px !important;
+      border-radius: 6px;
+      &::after {
+        transform: none;
+      }
+    }
+  }
+
+  .chat-search {
+    &.v-text-field--rounded > .v-input__control > .v-input__slot {
+      padding: 0 16px;
+    }
+  }
+}
+
+.ps-chat-left-sidebar {
+  height: calc(100% - 76px) !important;
+}
+
+.msg-input {
+  .v-input__slot {
+    @include ltr() {
+      padding-left: 14px !important;
+    }
+    @include rtl() {
+      padding-right: 14px !important;
+    }
+    @include ltr() {
+      padding-right: 7px !important;
+    }
+    @include rtl() {
+      padding-left: 7px !important;
+    }
+  }
+}
+
+// ————————————————————————————————————
+//* ——— Chat left Sidebar
+// ————————————————————————————————————
+
+.chat-left-sidebar {
+  .chat-contact {
+    .chat-meta {
+      .v-badge__badge {
+        margin-top: 2px;
+      }
+    }
+
+    &:not(:last-child) {
+      margin-bottom: 6px;
+    }
+
+    &.active-chat-contact {
+      p {
+        color: #fff !important;
+      }
+      .v-badge {
+        .v-avatar {
+          @include avatar-border(map(), true);
+        }
+        .v-badge__badge::after {
+          border-color: #fff;
+        }
+      }
+    }
+  }
+}
+
+@include theme--child(chat-left-sidebar) using ($material) {
+  .chat-contact {
+    &:hover {
+      background-color: rgba(map-deep-get($material, 'primary-shade'), map-deep-get($material, 'states', 'hover'));
+    }
+  }
+}
+
+// ————————————————————————————————————
+//* ——— User Profile Sidebar Content
+// ————————————————————————————————————
+
+.user-profile-sidebar-content {
+  .user-status-badge-lg {
+    &.v-badge--bordered .v-badge__badge {
+      height: 16px !important;
+      width: 16px !important;
+      border-radius: 8px;
+      min-width: unset;
+      &::after {
+        transform: none;
+      }
+    }
+  }
+
+  .ps-chat-user-profile-sidebar-content {
+    height: calc(100% - 218px);
+  }
+}
+
+// ————————————————————————————————————
+//* ——— Chat Content Area
+// ————————————————————————————————————
+
+@include theme--child(chat-content-area) using ($material) {
+  background-color: rgba(map-deep-get($material, 'primary-shade'), 0.04);
+}
+
+.chat-content-area {
+  .ps-chat-log {
+    height: calc(100% - 140px);
+  }
+
+  .chat-log {
+    .chat-group {
+      .chat-body {
+        max-width: 50%;
+        @media #{map-get($display-breakpoints, 'sm-and-down')} {
+          max-width: 75%;
+        }
+      }
+
+      .chat-content {
+        border-bottom-left-radius: 6px;
+        border-bottom-right-radius: 6px;
+
+        &.chat-left {
+          border-top-right-radius: 6px;
+        }
+
+        &.chat-right {
+          border-top-left-radius: 6px;
+        }
+      }
+    }
+  }
+}
