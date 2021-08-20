@@ -10,7 +10,11 @@ export default new VueRouter({
   routes: [
     {
       path: "/",
-      redirect: "home",
+      name: "dashboard",
+      component: () => import("@/views/Dashboard.vue"),
+      meta: {
+        layout: "blank",
+      },
     },
     {
       path: "/home",

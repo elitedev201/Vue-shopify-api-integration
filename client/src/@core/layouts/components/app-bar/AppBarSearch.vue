@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-btn
+    <!-- <v-btn
       icon
       small
       class="app-bar-search-toggler"
@@ -9,7 +9,7 @@
       <v-icon>
         {{ icons.mdiMagnify }}
       </v-icon>
-    </v-btn>
+    </v-btn> -->
 
     <!-- This is clever hack to hide scrolling 😉 -->
     <v-dialog

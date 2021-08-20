@@ -58,101 +58,22 @@
       </div>
 
       <v-divider></v-divider>
-
-      <!-- Profile -->
-      <v-list-item href="#">
-        <v-list-item-icon class="me-2">
-          <v-icon size="22">
-            {{ icons.mdiAccountOutline }}
-          </v-icon>
-        </v-list-item-icon>
-        <v-list-item-content>
-          <v-list-item-title>Profile</v-list-item-title>
-        </v-list-item-content>
-      </v-list-item>
-
-      <!-- Email -->
-      <v-list-item href="#">
-        <v-list-item-icon class="me-2">
-          <v-icon size="22">
-            {{ icons.mdiEmailOutline }}
-          </v-icon>
-        </v-list-item-icon>
-        <v-list-item-content>
-          <v-list-item-title>Inbox</v-list-item-title>
-        </v-list-item-content>
-      </v-list-item>
-
-      <!-- Chat -->
-      <v-list-item href="#">
-        <v-list-item-icon class="me-2">
-          <v-icon size="22">
-            {{ icons.mdiChatOutline }}
-          </v-icon>
-        </v-list-item-icon>
-        <v-list-item-content>
-          <v-list-item-title>Chat</v-list-item-title>
-        </v-list-item-content>
-
-        <v-list-item-action>
-          <v-badge
-            inline
-            color="error"
-            content="2"
-          >
-          </v-badge>
-        </v-list-item-action>
-      </v-list-item>
-
-      <v-divider class="my-2"></v-divider>
-
-      <!-- Settings -->
-      <v-list-item href="#">
-        <v-list-item-icon class="me-2">
-          <v-icon size="22">
-            {{ icons.mdiCogOutline }}
-          </v-icon>
-        </v-list-item-icon>
-        <v-list-item-content>
-          <v-list-item-title>Settings</v-list-item-title>
-        </v-list-item-content>
-      </v-list-item>
-
-      <!-- Pricing -->
-      <v-list-item href="#">
-        <v-list-item-icon class="me-2">
-          <v-icon size="22">
-            {{ icons.mdiCurrencyUsd }}
-          </v-icon>
-        </v-list-item-icon>
-        <v-list-item-content>
-          <v-list-item-title>Pricing</v-list-item-title>
-        </v-list-item-content>
-      </v-list-item>
-
-      <!-- FAQ -->
-      <v-list-item href="#">
-        <v-list-item-icon class="me-2">
-          <v-icon size="22">
-            {{ icons.mdiHelpCircleOutline }}
-          </v-icon>
-        </v-list-item-icon>
-        <v-list-item-content>
-          <v-list-item-title>FAQ</v-list-item-title>
-        </v-list-item-content>
-      </v-list-item>
-
-      <v-divider class="my-2"></v-divider>
-
       <!-- Logout -->
-      <v-list-item href="#">
+      <v-list-item>
         <v-list-item-icon class="me-2">
           <v-icon size="22">
             {{ icons.mdiLogoutVariant }}
           </v-icon>
         </v-list-item-icon>
         <v-list-item-content>
-          <v-list-item-title>Logout</v-list-item-title>
+          <v-list-item-title>
+            <div v-if="!$auth.loading">
+              <!-- show login when not authenticated -->
+              <a v-if="!$auth.isAuthenticated" @click="login">Sign in</a>
+              <!-- show logout when authenticated -->
+              <a v-if="$auth.isAuthenticated" @click="logout">Log out</a>
+            </div>
+          </v-list-item-title>
         </v-list-item-content>
       </v-list-item>
     </v-list>
@@ -169,7 +90,7 @@ import {
   mdiCurrencyUsd,
   mdiHelpCircleOutline,
   mdiLogoutVariant,
-} from '@mdi/js'
+} from "@mdi/js"
 
 export default {
   setup() {
@@ -185,6 +106,18 @@ export default {
         mdiLogoutVariant,
       },
     }
+  },
+  methods: {
+    // Log the user in
+    login() {
+      this.$auth.loginWithRedirect()
+    },
+    // Log the user out
+    logout() {
+      this.$auth.logout({
+        returnTo: window.location.origin,
+      })
+    },
   },
 }
 </script>
