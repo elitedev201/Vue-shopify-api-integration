@@ -25,21 +25,21 @@ export default new VueRouter({
       },
     },
     {
-      path: "/login",
-      name: "auth-login",
-      component: () => import("@/views/Login.vue"),
-      meta: {
-        layout: "blank",
-      },
-    },
-    {
       path: "*",
       redirect: "error-404",
     },
     {
-      path: "/about",
-      name: "about",
-      component: () => import("../views/About.vue"),
+      path: "/products",
+      name: "products",
+      component: () => import("../views/Products.vue"),
+      meta: {
+        layout: "content",
+      },
+    },
+    {
+      path: "/consignors",
+      name: "consignors",
+      component: () => import("../views/Consignors.vue"),
       meta: {
         layout: "content",
       },

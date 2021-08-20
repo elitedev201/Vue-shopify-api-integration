@@ -11,25 +11,8 @@
 
       <v-slide-x-reverse-transition>
         <div v-show="isCodeCollapsed">
-          <v-fade-transition mode="out-in">
-            <v-icon
-              :key="copyDynamicIcon"
-              size="21"
-              @click="copyActiveCode"
-            >
-              {{ copyDynamicIcon === 'copy' ? icons.mdiContentCopy : icons.mdiCheck }}
-            </v-icon>
-          </v-fade-transition>
         </div>
       </v-slide-x-reverse-transition>
-      <v-icon
-        dense
-        class="ms-4"
-        :color="isCodeCollapsed ? 'primary' : null"
-        @click="isCodeCollapsed = !isCodeCollapsed"
-      >
-        {{ icons.mdiCodeTags }}
-      </v-icon>
     </v-card-title>
     <div class="demo-content">
       <slot></slot>
@@ -38,14 +21,6 @@
     <v-expand-transition>
       <div v-show="isCodeCollapsed">
         <v-divider></v-divider>
-
-        <!-- Code -->
-        <v-card-text>
-          <prism :language="codeLanguage">
-            {{ code }}
-          </prism>
-        </v-card-text>
-        <!-- Snackbar: Copy not supported -->
         <v-snackbar
           v-model="showSnackbarCopyNotSupported"
           color="error"
@@ -89,27 +64,11 @@ import { ref } from '@vue/composition-api'
 import { mdiCodeTags, mdiLanguageJavascript, mdiLanguageTypescript, mdiContentCopy, mdiCheck } from '@mdi/js'
 import { useClipboard } from '@vueuse/core'
 
-// PrismJS
-import 'prismjs'
-import 'prismjs/themes/prism-tomorrow.css'
-import Prism from 'vue-prism-component'
-
 export default {
-  components: {
-    Prism,
-  },
   props: {
     title: {
       type: String,
       required: true,
-    },
-    code: {
-      type: String,
-      required: true,
-    },
-    codeLanguage: {
-      type: String,
-      default: 'markup',
     },
   },
   setup(props) {

@@ -35,7 +35,7 @@
   color: map-deep-get($material, 'text', 'secondary') !important;
 
   .v-card__title {
-    color: map-deep-get($material, 'text', 'primary') !important;
+    color: map-deep-get($material, 'text', 'primary');
   }
 
   h1,

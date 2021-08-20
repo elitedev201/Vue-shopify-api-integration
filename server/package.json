@@ -15,6 +15,7 @@
         "express": "^4.17.1",
         "express-jwt": "^6.0.0",
         "jwks-rsa": "^1.6.0",
+        "mssql": "^7.2.1",
         "nodemon": "^2.0.6"
     }
 }

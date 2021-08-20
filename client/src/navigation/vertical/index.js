@@ -1,4 +1,4 @@
-import { mdiFileOutline, mdiHomeOutline } from '@mdi/js'
+import { mdiAccountArrowRight, mdiHomeOutline, mdiCrownOutline } from '@mdi/js'
 
 export default [
   {
@@ -7,8 +7,13 @@ export default [
     to: 'home',
   },
   {
-    title: 'About Page',
-    icon: mdiFileOutline,
-    to: 'about',
+    title: 'Products',
+    icon: mdiCrownOutline,
+    to: 'products',
+  },
+  {
+    title: 'Consignors',
+    icon: mdiAccountArrowRight,
+    to: 'consignors',
   },
 ]

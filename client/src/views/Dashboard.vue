@@ -59,7 +59,7 @@
                 class="d-inline-flex flex-column justify-center ms-3"
                 style="vertical-align:middle"
               >
-                <span class="text--primary font-weight-semibold mb-n1">
+                <span class="text--primary font-weight-semibold mb-n1 right-space">
                   {{ $auth.user.name }}
                 </span>
                 <small class="text--disabled text-capitalize">Admin</small>

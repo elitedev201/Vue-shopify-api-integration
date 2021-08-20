@@ -1,8 +1,8 @@
 import axios from "axios"
 
 export default {
-  async getEvents() {
-    let res = await axios.get("http://localhost:8000/events");
+  async getProducts() {
+    let res = await axios.get("http://localhost:8000/products");
     return res.data;
   },
   async getEventSingle(eventId, accessToken) {

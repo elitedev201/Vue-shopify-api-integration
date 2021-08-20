@@ -51,7 +51,7 @@
           style="vertical-align:middle"
         >
           <span class="text--primary font-weight-semibold mb-n1 right-space">
-            {{ $auth.user.name }}
+            Smith Mori
           </span>
           <small class="text--disabled text-capitalize">Admin</small>
         </div>
