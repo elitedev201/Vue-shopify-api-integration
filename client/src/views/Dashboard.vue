@@ -93,7 +93,7 @@
               </v-icon>
             </v-list-item-icon>
             <v-list-item-content>
-              <v-list-item-title @click="login">Sign Up</v-list-item-title>
+              <v-list-item-title @click="login"><a>Sign Up</a></v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </v-list>
