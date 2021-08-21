@@ -22,8 +22,14 @@ const authConfig = {
 const config = {
   user: "sa",
   password: "root",
-  server: "localhost",
-  database: "2021-08-28-tconsigndb",
+  server: "LOCALHOST",
+  database: "2021-08-19_backup",
+  options: {
+    trustedConnection: true,
+    encrypt: true,
+    enableArithAbort: true,
+    trustServerCertificate: true,
+  },
 }
 
 // Create middleware to validate the JWT using express-jwt
@@ -59,11 +65,11 @@ app.get("/products", (req, res) => {
     var request = new sql.Request()
 
     // query to the database and get the records
-    request.query("select * from products", function (err, recordset) {
+    request.query("select * from products", function (err, data) {
       if (err) console.log(err)
 
       // send records as a response
-      res.send(recordset)
+      res.send(data.recordsets)
     })
   })
 })
