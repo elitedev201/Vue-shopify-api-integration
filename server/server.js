@@ -23,7 +23,7 @@ const config = {
   user: "sa",
   password: "root",
   server: "LOCALHOST",
-  database: "2021-08-19_backup",
+  database: "tconsignment_db",
   options: {
     trustedConnection: true,
     encrypt: true,
