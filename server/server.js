@@ -22,8 +22,8 @@ const authConfig = {
 const config = {
   user: "sa",
   password: "root",
-  server: "LOCALHOST",
-  database: "tconsignment_db",
+  server: "localhost",
+  database: "tconsign",
   options: {
     trustedConnection: true,
     encrypt: true,
@@ -69,7 +69,7 @@ app.get("/products", (req, res) => {
       if (err) console.log(err)
 
       // send records as a response
-      res.send(data.recordsets)
+      res.send(data.recordset)
     })
   })
 })
