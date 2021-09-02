@@ -43,16 +43,6 @@ The core system needs to enable the following roles and activities:
 The Tacoma Consignment SQL Server database is the source of truth for all data. To do so it has to also capture all the external transactions that occur in the Shopify and Stripe systems, as well as integrate into the Vuetify front-end to enable the management of the store.
 
 
-
-
-# How to Make Secure HTTP Requests with Vue and Express
-
-This is an example of how you can make secure API calls to an Express API from a Vue client. It uses Auth0 to secure the Express API and also to allow users to register and login to the Vue application.
-
-You can clone this project and follow the directions below or [check out the tutorial](https://auth0.com/blog/how-to-make-secure-http-requests-with-vue-and-express/) where I cover everything step by step!
-
-![Vue events app](https://cdn.auth0.com/blog/vue-meetup/vue-event-app-home.png)
-
 ## Project setup
 
 First, clone this repo and switch into the repo folder:
@@ -79,20 +69,6 @@ In a new terminal tab:
 cd ../client
 npm install
 ```
-
-## Configuring Auth0
-
-You're going to use Auth0 to add authentication to the app.
-
-First, [sign up for a free Auth0 account](https://auth0.com/signup). Once you're registered, you'll be taken to the [Auth0 management dashboard](https://manage.auth0.com/dashboard/).
-
-### Create the Auth0 application
-
-Click on the big red button that says "Create Application". 
-
-Name it "Vue Events" (or anything you'd like), click on "Single Page Web Applications" for "application type", and press "Create".
-
-![Auth0 Dashboard](https://cdn.auth0.com/blog/vue-meetup/auth0-create-app.png)
 
 Now click into "Settings" and fill in some information that Auth0 needs to configure authentication:
 
