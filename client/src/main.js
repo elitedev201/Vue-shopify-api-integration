@@ -1,14 +1,12 @@
-// Axios Mock Adapter
-import "@/plugins/vue-composition-api"
-import "@/styles/styles.scss"
 import Vue from "vue"
 import App from "./App.vue"
 import router from "./router"
-import vuetify from "./plugins/vuetify"
 import store from "./store"
+import vuetify from "./plugins/vuetify"
+import "@babel/polyfill"
+import "./assets/style.css"
 import moment from "moment-timezone"
 
-Vue.config.productionTip = false
 // Import the Auth0 configuration
 import { domain, clientId, audience } from "../auth_config.json"
 
@@ -20,7 +18,7 @@ Vue.use(Auth0Plugin, {
   domain,
   clientId,
   audience,
-  onRedirectCallback: (appState) => {
+  onRedirectCallback: appState => {
     router.push(
       appState && appState.targetUrl
         ? appState.targetUrl
@@ -29,7 +27,7 @@ Vue.use(Auth0Plugin, {
   },
 })
 
-Vue.filter("formatDate", function(value) {
+Vue.filter("formatDate", function (value) {
   if (value) {
     return moment(String(value)).format("MM/DD/YYYY hh:mm")
   }
@@ -41,7 +39,5 @@ new Vue({
   router,
   store,
   vuetify,
-  render: (h) => h(App),
+  render: h => h(App),
 }).$mount("#app")
-
-

@@ -1,0 +1,100 @@
+.custom-title .v-app-bar-title__content {
+  width: max-content !important;
+}
+
+.grey-col {
+  color: rgba(0, 0, 0, 0.87) !important;
+}
+
+.tc-title {
+  color: #fff !important;
+  font-weight: 700;
+  font-size: 4rem !important;
+  text-transform: uppercase;
+  line-height: 1.1;
+  text-shadow: 1px 1px 7px transparent;
+  display: flex;
+  justify-content: center;
+  margin-top: 18rem;
+  background: rgb(255, 255, 255, 0.1);
+}
+
+.tc-footer-layout {
+  padding: 2rem !important;
+}
+
+.v-application .mb-12 {
+  border-radius: 0px !important;
+  margin-bottom: 0px !important;
+}
+
+.v-toolbar {
+  flex: 0;
+}
+
+.icon-space {
+  padding: 1rem;
+  margin: 1rem;
+}
+
+.custom-spacing {
+  margin: 2rem 4rem;
+}
+
+.create-button {
+  margin: 3rem 4rem 0rem 0rem;
+}
+
+.create-product {
+  padding: 1rem 4rem 2rem 4rem;
+}
+
+.create-title {
+  padding: 2rem 0rem 0rem 3rem;
+}
+
+.tc-appbar {
+  background: rgb(255, 255, 255, 0.93) !important;
+}
+
+.icon-width {
+  width: 170px !important;
+}
+
+.right-space {
+  padding-right: 8px !important;
+}
+
+.text-start {
+  min-width: 123px;
+}
+
+.white-col {
+  color: white !important;
+}
+
+.create-card {
+  margin: 6rem 33% 2rem 33%;
+}
+
+.width-30 {
+  width: 30%;
+}
+
+.create-footer {
+  text-align: right;
+  margin-top: 2rem;
+}
+
+.loading-button {
+  margin-bottom: 2rem;
+}
+
+.custom-link{
+  color: rgba(0, 0, 0, 0.87) !important;
+  text-decoration: none;
+}
+
+.image-label {
+  margin: 2rem 0rem;
+}
