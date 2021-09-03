@@ -13,6 +13,8 @@
     "@mdi/js": "^5.9.55",
     "axios": "^0.21.1",
     "core-js": "^3.6.5",
+    "jspdf": "^2.3.1",
+    "jspdf-autotable": "^3.5.20",
     "moment-timezone": "^0.5.33",
     "vee-validate": "^3.4.11",
     "vue": "^2.6.11",

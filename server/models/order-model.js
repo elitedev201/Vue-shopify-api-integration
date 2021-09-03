@@ -9,7 +9,7 @@ function createOrders(req) {
   return new Promise((resolve, reject) => {
     var request = new db.Request()
 
-    const spfy_order_id = req.body.id
+    const spfy_order_id = req.body.name
     const spfy_email = req.body.contact_email
     const spfy_financial_status = req.body.financial_status
     const spfy_paid_at = req.body.processed_at

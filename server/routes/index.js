@@ -3,10 +3,12 @@ var router = require("express").Router()
 const products = require('./products')
 const consignors = require('./consignors')
 const orders = require('./orders')
+const payouts = require('./payouts')
 
 router.use(products)
 router.use(consignors)
 router.use(orders)
+router.use(payouts)
 
 router.get("/", (req, res) => {
   res.send(`Hi! Server is listening on port ${process.env.PORT}`)

@@ -7,7 +7,7 @@ const orderService = {
 
 function createOrders(req) {
   return new Promise((resolve, reject) => {
-    var order_id = req.body.id
+    var order_id = req.body.name
     var created_at = req.body.created_at
     var qty = 0
     var name = ""

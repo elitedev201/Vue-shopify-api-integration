@@ -27,8 +27,13 @@
           </v-list-item>
         </div>
         <div v-if="$auth.isAuthenticated">
-          <v-list-item>
+          <v-list-item href="/consignors">
             <v-list-item-title><a class="grey-col">Consignors</a></v-list-item-title>
+          </v-list-item>
+        </div>
+        <div v-if="$auth.isAuthenticated">
+          <v-list-item href="/payouts">
+            <v-list-item-title><a class="grey-col">Payouts</a></v-list-item-title>
           </v-list-item>
         </div>
         <v-list-item>
