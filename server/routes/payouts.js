@@ -1,8 +1,9 @@
 var router = require("express").Router()
 const checkAuth = require("../middleware/auth")
+const checkPermissions = require("../middleware/permission")
 const payoutService = require("../services/payoutService")
 
-router.get("/payouts", getPayouts)
+router.get("/payouts", checkAuth, checkPermissions, getPayouts)
 router.get("/payout_details", getPayoutDetailsByVendor)
 router.get("/payout", getPayoutByVendor)
 

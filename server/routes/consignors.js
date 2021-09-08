@@ -4,6 +4,7 @@ const consignorService = require("../services/consignorService")
 
 router.get("/consignors", getAllConsignors)
 router.get("/consignor", getConsignorByVendor)
+router.delete("/consignor", deleteConsignor)
 
 function getAllConsignors(req, res) {
   consignorService
@@ -20,6 +21,18 @@ function getConsignorByVendor(req, res) {
   const vendor = req.query.vendor
   consignorService
     .getConsignorByVendor(vendor)
+    .then(result => {
+      res.json(result)
+    })
+    .catch(err => {
+      res.json(err)
+    })
+}
+
+function deleteConsignor(req, res) {
+  const id = req.query.id
+  consignorService
+    .delConsignor(id)
     .then(result => {
       res.json(result)
     })

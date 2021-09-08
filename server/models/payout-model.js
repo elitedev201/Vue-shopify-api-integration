@@ -21,10 +21,13 @@ function getPayouts() {
     request.input("lastDate", db.DateTime, lastDate)
 
     let query =
-      "SELECT distinct(spfy_vendor), sum(spfy_line_item_qty) as items_sold, sum(spfy_line_item_qty * spfy_line_item_price) as total_sales, \
-    defaultPercentage, sum(spfy_line_item_qty * spfy_line_item_price * defaultPercentage/100) as net_sales from tstSpfyOrderItems items \
-    inner join consignors csn on csn.qbCompany = items.spfy_vendor where spfy_created_at > @firstDate and spfy_created_at < @lastDate \
-    group by spfy_vendor, defaultPercentage order by total_sales desc"
+    "SELECT distinct(spfy_vendor), sum(spfy_line_item_qty) as items_sold, \
+    format((sum(spfy_line_item_qty * spfy_line_item_price)), 'C') as total_sales, defaultPercentage, \
+    format(sum(spfy_line_item_qty * spfy_line_item_price * defaultPercentage/100), 'C') as net_sales from tstSpfyOrderItems items \
+    inner join consignors csn on csn.qbCompany = items.spfy_vendor \
+     where spfy_created_at > @firstDate and spfy_created_at < @lastDate \
+    group by spfy_vendor, defaultPercentage  \
+    order by total_sales desc"
 
     request.query(query, (error, rows) => {
       if (error) {
@@ -52,10 +55,11 @@ function getPayoutDetailsByVendor(vendor) {
     request.input("vendor", db.VarChar, vendor)
 
     let query =
-      "SELECT spfy_order_id, spfy_line_item_name, spfy_line_item_qty, spfy_line_item_price,	spfy_line_item_qty * spfy_line_item_price as total_amount, \
-    defaultPercentage, defaultPercentage / 100 * spfy_line_item_qty * spfy_line_item_price as net_amount from tstSpfyOrderItems items \
+      "SELECT spfy_order_id, spfy_line_item_name, spfy_line_item_qty, spfy_line_item_price,	spfy_line_item_qty * spfy_line_item_price as total_amount, defaultPercentage, \
+    format((defaultPercentage / 100 * spfy_line_item_qty * spfy_line_item_price), 'C') as net_amount from tstSpfyOrderItems items \
     inner join consignors csn on csn.qbCompany = items.spfy_vendor where spfy_vendor=@vendor and spfy_created_at > @firstDate and spfy_created_at < @lastDate \
-    group by spfy_order_id, spfy_vendor, spfy_line_item_name, defaultPercentage, spfy_line_item_price, spfy_line_item_qty order by spfy_vendor asc, total_amount desc"
+    group by spfy_order_id, spfy_vendor, spfy_line_item_name, defaultPercentage, spfy_line_item_price, spfy_line_item_qty \
+    order by total_amount desc"
 
     request.query(query, (error, rows) => {
       if (error) {
@@ -83,10 +87,12 @@ function getPayoutByVendor(vendor) {
     request.input("vendor", db.VarChar, vendor)
 
     let query =
-      "SELECT distinct(spfy_vendor), sum(spfy_line_item_qty) as items_sold, sum(spfy_line_item_qty * spfy_line_item_price) as total_sales, \
+      "SELECT distinct(spfy_vendor), sum(spfy_line_item_qty) as items_sold, \
+      format(sum(spfy_line_item_qty * spfy_line_item_price), 'C') as total_sales, \
     defaultPercentage, sum(spfy_line_item_qty * spfy_line_item_price * defaultPercentage/100) as net_sales from tstSpfyOrderItems items \
-    inner join consignors csn on csn.qbCompany = items.spfy_vendor where spfy_created_at > @firstDate and spfy_created_at < @lastDate and spfy_vendor=@vendor\
-    group by spfy_vendor, defaultPercentage order by total_sales desc"
+    inner join consignors csn on csn.qbCompany = items.spfy_vendor where spfy_created_at > @firstDate and spfy_created_at < @lastDate and spfy_vendor=@vendor \
+    group by spfy_vendor, defaultPercentage \
+    order by total_sales desc"
 
     request.query(query, (error, rows) => {
       if (error) {

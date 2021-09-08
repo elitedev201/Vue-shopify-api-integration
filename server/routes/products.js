@@ -1,6 +1,7 @@
 var router = require("express").Router()
 const multer = require("multer")
 const checkAuth = require("../middleware/auth")
+
 const productService = require("../services/productService")
 
 const inMemoryStorage = multer.memoryStorage()
@@ -10,7 +11,7 @@ const uploadStrategy = multer({ storage: inMemoryStorage }).array("files", 10)
 //   res.send(data)
 // })
 
-router.get("/products", getAllProducts)
+router.get("/products", checkAuth, getAllProducts)
 router.get("/product", getProductById)
 router.post("/products", uploadStrategy, setProducts)
 router.put("/products", uploadStrategy, updateProducts)

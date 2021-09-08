@@ -16,6 +16,7 @@
         "dotenv": "^10.0.0",
         "express": "^4.17.1",
         "express-jwt": "^6.0.0",
+        "express-jwt-authz": "^2.4.1",
         "into-stream": "^3.1.0",
         "jwks-rsa": "^1.6.0",
         "mssql": "^7.2.1",

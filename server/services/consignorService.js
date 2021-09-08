@@ -1,9 +1,9 @@
 const consignorModel = require("../models/consignor-model")
-const shopify = require("./shopify")
 
 const consignorService = {
   getAllConsignors: getAllConsignors,
   getConsignorByVendor: getConsignorByVendor,
+  delConsignor: delConsignor,
 }
 
 function getAllConsignors() {
@@ -15,7 +15,6 @@ function getAllConsignors() {
       })
       .catch(err => {
         reject(err.message)
-        console.log(err)
       })
   })
 }
@@ -29,7 +28,19 @@ function getConsignorByVendor(vendor) {
       })
       .catch(err => {
         reject(err.message)
-        console.log(err)
+      })
+  })
+}
+
+function delConsignor(id) {
+  return new Promise((resolve, reject) => {
+    consignorModel
+      .delConsignor(id)
+      .then(data => {
+        resolve({ code: 200, data })
+      })
+      .catch(err => {
+        reject(err.message)
       })
   })
 }
