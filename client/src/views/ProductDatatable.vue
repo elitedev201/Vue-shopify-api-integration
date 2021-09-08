@@ -14,54 +14,88 @@
     <v-data-table :headers="headers" :items="productList" :search="search">
       <!-- product -->
       <template #[`item.shopify_id`]="{ item }">
-        <a :href="'/product/'+ item.product_id" class="custom-link"><span class="text-no-wrap">{{ item.shopify_id }}</span></a>
+        <a :href="'/product/' + item.product_id" class="custom-link"
+          ><span class="text-no-wrap">{{ item.shopify_id }}</span></a
+        >
       </template>
       <template #[`item.main_img_src`]="{ item }">
         <div class="d-flex align-center">
-          <a :href="'/product/'+ item.product_id" class="custom-link"><span class="">{{ item.main_img_src }}</span></a>
+          <a :href="'/product/' + item.product_id" class="custom-link"
+            ><span class="">{{ item.main_img_src }}</span></a
+          >
         </div>
       </template>
       <template #[`item.title`]="{ item }">
-        <a :href="'/product/'+ item.product_id" class="custom-link"><span class="text-no-wrap">{{ item.title }}</span></a>
+        <a :href="'/product/' + item.product_id" class="custom-link"
+          ><span class="text-no-wrap">{{ item.title }}</span></a
+        >
       </template>
       <template #[`item.description`]="{ item }">
-        <a :href="'/product/'+ item.product_id" class="custom-link"><span class="text-no-wrap">{{ item.description }}</span></a>
+        <a :href="'/product/' + item.product_id" class="custom-link"
+          ><span class="text-no-wrap">{{ item.description }}</span></a
+        >
       </template>
       <template #[`item.vendor`]="{ item }">
-        <a :href="'/product/'+ item.product_id" class="custom-link"><span class="text-no-wrap">{{ item.vendor }}</span></a>
+        <a :href="'/product/' + item.product_id" class="custom-link"
+          ><span class="text-no-wrap">{{ item.vendor }}</span></a
+        >
       </template>
       <template #[`item.consignorID`]="{ item }">
-        <a :href="'/product/'+ item.product_id" class="custom-link"><span class="text-no-wrap">{{ item.consignorID }}</span></a>
+        <a :href="'/product/' + item.product_id" class="custom-link"
+          ><span class="text-no-wrap">{{ item.consignorID }}</span></a
+        >
       </template>
       <template #[`item.price`]="{ item }">
-        <a :href="'/product/'+ item.product_id" class="custom-link"><span class="text-no-wrap">${{ item.price }}</span></a>
+        <a :href="'/product/' + item.product_id" class="custom-link"
+          ><span class="text-no-wrap">${{ item.price }}</span></a
+        >
       </template>
       <template #[`item.color`]="{ item }">
-        <a :href="'/product/'+ item.product_id" class="custom-link"><span class="text-no-wrap">{{ item.color }}</span></a>
+        <a :href="'/product/' + item.product_id" class="custom-link"
+          ><span class="text-no-wrap">{{ item.color }}</span></a
+        >
       </template>
       <template #[`item.material`]="{ item }">
-        <a :href="'/product/'+ item.product_id" class="custom-link"><span class="text-no-wrap">{{ item.material }}</span></a>
+        <a :href="'/product/' + item.product_id" class="custom-link"
+          ><span class="text-no-wrap">{{ item.material }}</span></a
+        >
       </template>
       <template #[`item.size`]="{ item }">
-        <a :href="'/product/'+ item.product_id" class="custom-link"><span class="text-no-wrap">{{ item.size }}</span></a>
+        <a :href="'/product/' + item.product_id" class="custom-link"
+          ><span class="text-no-wrap">{{ item.size }}</span></a
+        >
       </template>
       <template #[`item.product_type`]="{ item }">
-        <a :href="'/product/'+ item.product_id" class="custom-link"><span class="text-no-wrap">{{ item.product_type }}</span></a>
+        <a :href="'/product/' + item.product_id" class="custom-link"
+          ><span class="text-no-wrap">{{ item.product_type }}</span></a
+        >
       </template>
       <template #[`item.qb_sku`]="{ item }">
-        <a :href="'/product/'+ item.product_id" class="custom-link"><span class="text-no-wrap">{{ item.qb_sku }}</span></a>
+        <a :href="'/product/' + item.product_id" class="custom-link"
+          ><span class="text-no-wrap">{{ item.qb_sku }}</span></a
+        >
       </template>
       <template #[`item.barcode`]="{ item }">
-        <a :href="'/product/'+ item.product_id" class="custom-link"><span class="text-no-wrap">{{ item.barcode }}</span></a>
+        <a :href="'/product/' + item.product_id" class="custom-link"
+          ><span class="text-no-wrap">{{ item.barcode }}</span></a
+        >
       </template>
       <template #[`item.sale_price`]="{ item }">
-        <a :href="'/product/'+ item.product_id" class="custom-link"><span class="text-no-wrap">{{ item.sale_price }}</span></a>
+        <a :href="'/product/' + item.product_id" class="custom-link"
+          ><span class="text-no-wrap">{{ item.sale_price }}</span></a
+        >
       </template>
       <template #[`item.sale_price_set`]="{ item }">
-        <a :href="'/product/'+ item.product_id" class="custom-link"><span class="text-no-wrap">{{ item.sale_price_set | formatDate }}</span></a>
+        <a :href="'/product/' + item.product_id" class="custom-link"
+          ><span class="text-no-wrap">{{
+            item.sale_price_set | formatDate
+          }}</span></a
+        >
       </template>
       <template #[`item.sale_price_system`]="{ item }">
-        <a :href="'/product/'+ item.product_id" class="custom-link"><span class="text-no-wrap">{{ item.sale_price_system }}</span></a>
+        <a :href="'/product/' + item.product_id" class="custom-link"
+          ><span class="text-no-wrap">{{ item.sale_price_system }}</span></a
+        >
       </template>
       <template #[`item.actions`]="{ item }">
         <span class="text-no-wrap">
@@ -291,10 +325,12 @@ export default {
 
   methods: {
     async getProductsData() {
-      // Use the eventService to call the getEvents() method
-      productService.getProducts().then(res => {
+      //Get accessToken
+      const accessToken = await this.$auth.getTokenSilently()
+
+      // Use the productService to call the getProducts() method
+      productService.getProducts(accessToken).then(res => {
         this.productList = res.data
-        console.log(res.shopifyData)
       })
     },
 

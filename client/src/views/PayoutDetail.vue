@@ -19,19 +19,15 @@
           </div>
         </div>
         <div class="d-flex flex-column justify-space-between">
-          <div class="p-sub-title"><strong>Company: </strong>{{ company }}</div>
+          <div class="p-sub-title">{{ company }}</div>
           <div class="p-sub-title">
-            <strong>StreetAddress1: </strong>{{ streetAddress1 }}
+            {{ streetAddress1 }}
           </div>
           <div class="p-sub-title">
-            <strong>StreetAddress2: </strong>{{ streetAddress2 }}
+            {{ streetAddress2 }}
           </div>
           <div class="p-sub-title">
-            <div class="d-flex justify-between">
-              <div><strong>City:</strong> {{ city }} &nbsp;&nbsp;&nbsp;</div>
-              <div><strong>State:</strong> {{ state }}&nbsp;&nbsp;&nbsp;</div>
-              <div><strong>Zip:</strong> {{ zip }}</div>
-            </div>
+            {{ bottom_line }}
           </div>
         </div>
         <v-card>
@@ -109,6 +105,7 @@ import moment from "moment"
 import consignorService from "../services/consignorService"
 import { jsPDF } from "jspdf"
 import "jspdf-autotable"
+import converter from "number-to-words"
 
 export default {
   data: () => ({
@@ -129,9 +126,7 @@ export default {
     date: "",
     streetAddress1: "",
     streetAddress2: "",
-    city: "",
-    state: "",
-    zip: "",
+    bottom_line: "",
   }),
 
   created() {
@@ -156,9 +151,7 @@ export default {
         this.company = res.data[0].qbCompany
         this.streetAddress1 = res.data[0].qbStAddress1
         this.streetAddress2 = res.data[0].qbStAddress2
-        this.city = res.data[0].qbCity
-        this.state = res.data[0].qbState
-        this.zip = res.data[0].qbZip
+        this.bottom_line = res.data[0].bottom_line
       })
     },
 
@@ -172,6 +165,9 @@ export default {
 
     async pdfGenerate() {
       var items = this.payoutDetails
+      var decimal = this.totalSales - Math.floor(this.totalSales)
+      var text_ordinal = converter.toWords(this.totalSales) + ' and ' + (decimal * 100) + '/100'
+      // var text_numeral = converter.toWords(this.totalSales)
       var address2 = ""
 
       if (this.streetAddress2) {
@@ -179,30 +175,22 @@ export default {
       }
 
       var doc = new jsPDF()
-      doc.setFont("times", "bold")
+      doc.setFont("helvetica", "normal")
       doc.text(this.company, 17, 20)
 
-      doc.setFont("times", "normal")
-      doc.setFontSize(12)
-      doc.text(this.date, 170, 20)
+      doc.setFont("helvetica", "normal")
+      doc.setFontSize(11)
+      doc.text(this.totalSales.toFixed(2), 180, 45)
+      doc.text(this.date, 170, 10)
 
-      doc.text("Company:", 25, 35)
-      doc.text(this.company, 45, 35)
+      doc.text(text_ordinal, 35, 35)
+      doc.text(this.company, 45, 50)
 
-      doc.text("Address1:", 25, 44)
-      doc.text(this.streetAddress1, 45, 44)
+      doc.text(this.streetAddress1, 45, 55)
 
-      doc.text("Address2:", 25, 53)
-      doc.text(address2, 45, 53)
+      doc.text(address2, 45, 60)
 
-      doc.text("City:", 25, 62)
-      doc.text(this.city, 35, 62)
-
-      doc.text("State:", 53, 62)
-      doc.text(this.state, 65, 62)
-
-      doc.text("Zip:", 78, 62)
-      doc.text(this.zip, 88, 62)
+      doc.text(this.bottom_line, 45, 65)
 
       var rows = []
 
@@ -226,11 +214,11 @@ export default {
         "",
         "",
         "Total Due",
-        this.totalSales,
+        '$' + this.totalSales.toFixed(2),
       ])
 
       doc.autoTable({
-        margin: { top: 70 },
+        margin: { top: 90 },
         didDrawPage: function (data) {
           data.settings.margin.top = 10
         },
@@ -250,7 +238,7 @@ export default {
 
       // doc.autoTable(col, rows)
 
-      doc.save(this.date + "_Payout.pdf")
+      doc.save(this.company + "_payout_" + this.date + ".pdf")
     },
   },
 }

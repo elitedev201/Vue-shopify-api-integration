@@ -1,7 +1,7 @@
 <template>
   <v-card>
     <v-card-title>
-      ConsignorPayoutList
+      Consignor Payouts for August
       <v-spacer></v-spacer>
       <v-text-field
         v-model="search"
@@ -67,11 +67,11 @@ export default {
   data: () => ({
     search: "",
     headers: [
-      { text: "Shopify_vendor", value: "spfy_vendor" },
-      { text: "Items_sold", value: "items_sold" },
-      { text: "Total_sales", value: "total_sales" },
-      { text: "Default_percentage", value: "defaultPercentage" },
-      { text: "Net_sales", value: "net_sales" },
+      { text: "Consignor", value: "spfy_vendor" },
+      { text: "Total items sold", value: "items_sold" },
+      { text: "Total sales", value: "total_sales" },
+      { text: "(%)", value: "defaultPercentage" },
+      { text: "Net payout", value: "net_sales" },
       // { text: "Action", value: "actions", sortable: false },
     ],
     payoutList: [],
@@ -83,8 +83,11 @@ export default {
 
   methods: {
     async getPayoutData() {
+
+      //Get accessToken
+      const accessToken = await this.$auth.getTokenSilently()
       // Use the eventService to call the getEvents() method
-      payoutService.getPayouts().then(res => {
+      payoutService.getPayouts(accessToken).then(res => {
         this.payoutList = res.data
       })
     },

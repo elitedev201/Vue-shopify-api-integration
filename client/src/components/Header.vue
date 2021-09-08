@@ -1,53 +1,21 @@
 <template>
-  <v-app-bar color="blue" dark>
-    <v-app-bar-nav-icon href="/" color="white"></v-app-bar-nav-icon>
-    <v-app-bar-title class="custom-title">Tconsign - Portal</v-app-bar-title>
+  <v-app-bar app color="primary" dark>
+    <v-icon href="/" color="white" class="px-4">mdi-cloud-upload</v-icon>
+    <v-app-bar-title class="custom-title"
+      >Tacoma Consignment Portal</v-app-bar-title
+    >
     <v-spacer></v-spacer>
-    <v-menu bottom left>
-      <template v-slot:activator="{ on, attrs }">
-        <v-btn icon color="white" v-bind="attrs" v-on="on">
-          <v-icon>mdi-dots-vertical</v-icon>
-        </v-btn>
-      </template>
-
-      <v-list>
-        <v-list-item>
-          <v-list-item-title>
-            <div v-if="!$auth.loading">
-              <!-- show login when not authenticated -->
-              <a v-if="!$auth.isAuthenticated" @click="login" class="grey-col">Sign Up</a>
-              <!-- show logout when authenticated -->
-              <a v-if="$auth.isAuthenticated" class="grey-col">{{ $auth.user.name }}</a>
-            </div>
-          </v-list-item-title>
-        </v-list-item>
-        <div v-if="$auth.isAuthenticated">
-          <v-list-item href="/products">
-            <v-list-item-title><a class="grey-col">Products</a></v-list-item-title>
-          </v-list-item>
-        </div>
-        <div v-if="$auth.isAuthenticated">
-          <v-list-item href="/consignors">
-            <v-list-item-title><a class="grey-col">Consignors</a></v-list-item-title>
-          </v-list-item>
-        </div>
-        <div v-if="$auth.isAuthenticated">
-          <v-list-item href="/payouts">
-            <v-list-item-title><a class="grey-col">Payouts</a></v-list-item-title>
-          </v-list-item>
-        </div>
-        <v-list-item>
-          <v-list-item-title>
-            <div v-if="!$auth.loading">
-              <!-- show login when not authenticated -->
-              <a v-if="!$auth.isAuthenticated" @click="login" class="grey-col">Sign in</a>
-              <!-- show logout when authenticated -->
-              <a v-if="$auth.isAuthenticated" @click="logout" class="grey-col">Log out</a>
-            </div>
-          </v-list-item-title>
-        </v-list-item>
-      </v-list>
-    </v-menu>
+    <v-btn class="mx-4" color="primary" href="/consignors">Consignors</v-btn>
+    <v-btn class="mx-4" color="primary" href="/products">Catalog</v-btn>
+    <span class="mx-4" v-if="$auth.isAuthenticated">
+      <v-icon right dark> mdi-cloud-upload </v-icon>{{ $auth.user.name }}</span
+    >
+    <v-btn @click="login" color="primary" v-if="!$auth.isAuthenticated"
+      >Sign in
+    </v-btn>
+    <v-btn @click="logout" color="primary" v-if="$auth.isAuthenticated"
+      >Log out
+    </v-btn>
   </v-app-bar>
 </template>
 

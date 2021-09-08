@@ -1,8 +1,12 @@
 import axios from "axios"
 
 export default {
-  async getProducts() {
-    let res = await axios.get(process.env.VUE_APP_API_URL + "products")
+  async getProducts(accessToken) {
+    let res = await axios.get(process.env.VUE_APP_API_URL + "products", {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    })
     return res.data
   },
 

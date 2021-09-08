@@ -1,8 +1,12 @@
 import axios from "axios"
 
 export default {
-  async getPayouts() {
-    let res = await axios.get(process.env.VUE_APP_API_URL + "payouts")
+  async getPayouts(accessToken) {
+    let res = await axios.get(process.env.VUE_APP_API_URL + "payouts", {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    })
     return res.data
   },
   async getPayoutDetails(vendor) {

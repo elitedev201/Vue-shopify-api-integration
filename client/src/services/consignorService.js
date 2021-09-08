@@ -6,12 +6,21 @@ export default {
     return res.data
   },
 
+  async deleteConsignor(id) {
+    let res = await axios.delete(process.env.VUE_APP_API_URL + "consignor", {
+      params: {
+        id: id,
+      },
+    })
+    return res.data
+  },
+
   async getConsignorByVendor(vendor) {
     let res = await axios.get(process.env.VUE_APP_API_URL + "consignor", {
       params: {
-        vendor: vendor
-      }
+        vendor: vendor,
+      },
     })
     return res.data
-  }
+  },
 }
