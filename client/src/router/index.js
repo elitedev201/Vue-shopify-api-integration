@@ -48,6 +48,12 @@ const routes = [
     beforeEnter: authGuard,
   },
   {
+    path: "/create_consignor",
+    name: "CreateConsignor",
+    component: () => import("../views/CreateConsignor.vue"),
+    beforeEnter: authGuard,
+  },
+  {
     path: "/consignor/:id",
     name: "ConsignorDetail",
     component: () => import("../views/ConsignorDetail.vue"),

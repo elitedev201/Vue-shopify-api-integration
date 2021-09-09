@@ -124,6 +124,7 @@ export default {
     },
   },
   created() {
+    console.log(this.$auth)
     this.getConsignors()
   },
 
