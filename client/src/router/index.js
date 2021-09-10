@@ -18,6 +18,12 @@ const routes = [
     beforeEnter: authGuard,
   },
   {
+    path: "/products/:vendor",
+    name: "ProductsByVendor",
+    component: () => import("../views/ProductsByVendor.vue"),
+    beforeEnter: authGuard,
+  },
+  {
     path: "/create_product",
     name: "CreateProduct",
     component: () => import("../views/CreateProduct.vue"),

@@ -3,12 +3,38 @@ const checkAuth = require("../middleware/auth")
 const consignorService = require("../services/consignorService")
 
 router.get("/consignors", getAllConsignors)
+router.post("/consignor", addConsignor)
+router.get("/consignorbyid", getConsignorById)
 router.get("/consignor", getConsignorByVendor)
 router.delete("/consignor", deleteConsignor)
 
 function getAllConsignors(req, res) {
   consignorService
     .getAllConsignors()
+    .then(result => {
+      res.json(result)
+    })
+    .catch(err => {
+      res.json(err)
+    })
+}
+
+function addConsignor(req, res) {
+  var data = req.body
+  consignorService
+    .addConsignor(data)
+    .then(result => {
+      res.json(result)
+    })
+    .catch(err => {
+      res.json(err)
+    })
+}
+
+function getConsignorById(req, res) {
+  const id = req.query.id
+  consignorService
+    .getConsignorById(id)
     .then(result => {
       res.json(result)
     })

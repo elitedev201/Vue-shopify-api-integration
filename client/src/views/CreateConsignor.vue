@@ -1,100 +1,91 @@
 <template>
   <div>
     <v-card class="create-card">
-      <v-card-title class="create-title">Create Product</v-card-title>
+      <v-card-title class="create-title">Create Consignor</v-card-title>
       <div class="create-product">
         <validation-observer ref="observer" v-slot="{ invalid }">
-          <form @submit.prevent="submit" id="create-product">
+          <form @submit.prevent="submit" id="create-consignor">
             <validation-provider
               v-slot="{ errors }"
-              name="Title"
-              rules="required|max:20"
+              name="company"
+              rules="required"
             >
               <v-text-field
-                v-model="title"
-                :counter="20"
+                v-model="company"
                 :error-messages="errors"
-                label="Title"
+                label="Company Name"
                 required
               ></v-text-field>
             </validation-provider>
-            <validation-provider
-              v-slot="{ errors }"
-              name="description"
-              rules="required"
-            >
-              <v-textarea
-                :error-messages="errors"
-                v-model="description"
-                label="Description"
-                required
-              ></v-textarea>
-            </validation-provider>
-            <validation-provider
-              v-slot="{ errors }"
-              name="consignor"
-              rules="required"
-            >
-              <v-select
-                v-model="consignor"
-                :items="consignorList"
-                :item-text="'qbCompany'"
-                :item-value="'id'"
-                :error-messages="errors"
-                label="Consignor"
-                required
-              ></v-select>
-            </validation-provider>
-            <v-file-input
-              label="Product Image"
-              dense
-              multiple
-              chips
-              v-model="productImgs"
-            ></v-file-input>
-            <validation-provider
-              v-slot="{ errors }"
-              name="productType"
-              rules="required"
-            >
-              <v-select
-                v-model="product_type"
-                :items="productType"
-                :error-messages="errors"
-                label="ProductType"
-                data-vv-name="productType"
-                required
-              ></v-select>
-            </validation-provider>
-            <v-text-field v-model="color" label="Color"></v-text-field>
+            <v-row>
+              <v-col md="6">
+                <v-text-field
+                  v-model="first"
+                  label="First"
+                  required
+                ></v-text-field>
+              </v-col>
+              <v-col md="6">
+                <v-text-field
+                  v-model="last"
+                  label="Last"
+                  required
+                ></v-text-field>
+              </v-col>
+            </v-row>
+
+            <v-row>
+              <v-col md="6">
+                <validation-provider
+                  v-slot="{ errors }"
+                  name="email"
+                  rules="required|email"
+                >
+                  <v-text-field
+                    v-model="email"
+                    :error-messages="errors"
+                    label="E-mail"
+                    required
+                  ></v-text-field>
+                </validation-provider>
+              </v-col>
+              <v-col md="6">
+                <v-text-field
+                  v-model="phone"
+                  label="Phone"
+                  required
+                ></v-text-field>
+              </v-col>
+            </v-row>
             <v-text-field
-              v-model="size"
-              label="Size"
-              type="number"
-            ></v-text-field>
-            <v-text-field v-model="material" label="Material"></v-text-field>
-            <v-text-field
-              v-model="base_price"
-              label="BasePrice"
-              prefix="$"
-              type="number"
+              v-model="stAddress1"
+              label="Street Address1"
+              required
             ></v-text-field>
             <v-text-field
-              v-model="cost"
-              label="Cost"
-              prefix="$"
-              type="number"
+              v-model="stAddress2"
+              label="Street Address2"
+              required
             ></v-text-field>
-            <v-text-field v-model="notes" label="Notes"></v-text-field>
-            <v-text-field
-              v-model="published_at"
-              label="PublishedDate"
-              type="date"
-            ></v-text-field>
-            <v-text-field
-              v-model="discountSchedule"
-              label="DiscountSchedule"
-            ></v-text-field>
+            <v-row>
+              <v-col md="4">
+                <v-text-field
+                  v-model="city"
+                  label="City"
+                  required
+                ></v-text-field>
+              </v-col>
+              <v-col md="4">
+                <v-text-field
+                  v-model="state"
+                  label="State"
+                  required
+                ></v-text-field>
+              </v-col>
+              <v-col md="4">
+                <v-text-field v-model="zip" label="Zip" required></v-text-field>
+              </v-col>
+            </v-row>
             <div class="create-footer">
               <v-btn class="mr-4" type="submit" :disabled="invalid">
                 Add
@@ -125,7 +116,6 @@ import {
   setInteractionMode,
 } from "vee-validate"
 import consignorService from "../services/consignorService"
-import productService from "../services/productService"
 
 setInteractionMode("eager")
 
@@ -163,71 +153,55 @@ export default {
     this.getConsignors()
   },
   data: () => ({
-    title: "",
-    description: "",
-    notes: "",
-    consignor: null,
-    consignorList: [],
-    product_type: null,
-    productType: ["Sofa", "Chair", "Table"],
-    color: "",
-    material: "",
-    base_price: 0,
-    size: 0,
-    cost: 0,
-    published_at: "",
-    discountSchedule: "",
-    productImgs: null,
+    company: "",
+    first: "",
+    last: "",
+    email: "",
+    phone: "",
+    stAddress1: "",
+    stAddress2: "",
+    city: "",
+    state: "",
+    zip: "",
     loading: false,
   }),
 
   methods: {
     submit() {
-      // this.$refs.observer.validate()
-      let formData = new FormData()
-      let consignor_id = this.consignor
-      let title = this.title
-      let description = this.description
-      let product_type = this.product_type
-      let color = this.color
-      let size = this.size
-      let material = this.material
-      let price = this.cost
-      let base_price = this.base_price
-      let notes = this.notes
-      let published_at = this.published_at
-      let discountSchedule = this.discountSchedule
+      let company = this.company
+      let first = this.first
+      let last = this.last
+      let email = this.email
+      let phone = this.phone
+      let stAddress1 = this.stAddress1
+      let stAddress2 = this.stAddress2
+      let city = this.city
+      let state = this.state
+      let zip = this.zip
 
-      if (this.productImgs) {
-        for (let file of this.productImgs) {
-          formData.append("files", file, file.name)
-        }
-      } else {
-        console.log("there are no files.")
+      var data = {
+        company: company,
+        first: first,
+        last: last,
+        email: email,
+        phone: phone,
+        stAddress1: stAddress1,
+        stAddress2: stAddress2,
+        city: city,
+        state: state,
+        zip: zip,
       }
 
-      formData.append("consignor_id", consignor_id)
-      formData.append("title", title)
-      formData.append("description", description)
-      formData.append("product_type", product_type)
-      formData.append("color", color)
-      formData.append("size", size)
-      formData.append("material", material)
-      formData.append("price", price)
-      formData.append("base_price", base_price)
-      formData.append("notes", notes)
-      formData.append("published_at", published_at)
-      formData.append("discountSchedule", discountSchedule)
       this.loading = true
 
-      productService
-        .addProduct(formData)
+      consignorService
+        .addConsignor(data)
         .then(res => {
           if (res.code == 200) {
-            alert("Successfully added product!")
+            alert("Successfully added consignor!")
             this.loading = false
           } else {
-            alert("Unfortunately, can't add product!")
+            alert("Unfortunately, can't add consignor!")
             this.loading = false
           }
         })
@@ -238,7 +212,7 @@ export default {
     },
 
     clear() {
-      window.location.href = "/products"
+      window.location.href = "/consignors"
     },
     async getConsignors() {
       consignorService.getConsignors().then(res => {
