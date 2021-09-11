@@ -19,6 +19,15 @@ export default {
     return res.data
   },
 
+  async getProductsByVendor(vendor) {
+    let res = await axios.get(process.env.VUE_APP_API_URL + "productsbyvendor", {
+      params: {
+        vendor: vendor,
+      },
+    })
+    return res.data
+  },
+
   async addProduct(formData) {
     let res = await axios.post(
       process.env.VUE_APP_API_URL + "products",

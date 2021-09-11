@@ -3,6 +3,7 @@ const consignorModel = require("../models/consignor-model")
 const consignorService = {
   getAllConsignors: getAllConsignors,
   addConsignor: addConsignor,
+  updateConsignor: updateConsignor,
   getConsignorById: getConsignorById,
   getConsignorByVendor: getConsignorByVendor,
   delConsignor: delConsignor,
@@ -25,6 +26,19 @@ function addConsignor(consignor_data) {
   return new Promise((resolve, reject) => {
     consignorModel
       .addConsignor(consignor_data)
+      .then(data => {
+        resolve({ code: 200 })
+      })
+      .catch(err => {
+        reject(err.message)
+      })
+  })
+}
+
+function updateConsignor(consignor_data) {
+  return new Promise((resolve, reject) => {
+    consignorModel
+      .updateConsignor(consignor_data)
       .then(data => {
         resolve({ code: 200 })
       })

@@ -21,7 +21,7 @@
 
             <v-row>
               <v-col md="4">
-                <v-btn color="primary"> Active Products </v-btn>
+                <v-btn color="primary" :href="'/products/' + company"> Active Products </v-btn>
               </v-col>
               <v-col md="4">
                 <v-btn color="primary"> Upcoming Payout </v-btn>
@@ -79,7 +79,6 @@
             <v-text-field
               v-model="stAddress2"
               label="Street Address2"
-              required
             ></v-text-field>
             <v-row>
               <v-col md="4">
@@ -211,8 +210,10 @@ export default {
       let city = this.city
       let state = this.state
       let zip = this.zip
+      let id = this.id
 
       var data = {
+        id: id,
         company: company,
         first: first,
         last: last,
@@ -228,13 +229,13 @@ export default {
       this.loading = true
 
       consignorService
-        .addConsignor(data)
+        .updateConsignor(data)
         .then(res => {
           if (res.code == 200) {
-            alert("Successfully added consignor!")
+            alert("Successfully updated consignor!")
             this.loading = false
           } else {
-            alert("Unfortunately, can't add consignor!")
+            alert("Unfortunately, can't updated consignor!")
             this.loading = false
           }
         })

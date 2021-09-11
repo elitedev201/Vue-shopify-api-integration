@@ -4,6 +4,7 @@ const consignorService = require("../services/consignorService")
 
 router.get("/consignors", getAllConsignors)
 router.post("/consignor", addConsignor)
+router.put("/consignor", updateConsignor)
 router.get("/consignorbyid", getConsignorById)
 router.get("/consignor", getConsignorByVendor)
 router.delete("/consignor", deleteConsignor)
@@ -23,6 +24,18 @@ function addConsignor(req, res) {
   var data = req.body
   consignorService
     .addConsignor(data)
+    .then(result => {
+      res.json(result)
+    })
+    .catch(err => {
+      res.json(err)
+    })
+}
+
+function updateConsignor(req, res) {
+  var data = req.body
+  consignorService
+    .updateConsignor(data)
     .then(result => {
       res.json(result)
     })

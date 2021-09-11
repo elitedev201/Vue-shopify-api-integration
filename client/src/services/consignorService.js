@@ -11,6 +11,11 @@ export default {
     return res.data
   },
 
+  async updateConsignor(data) {
+    let res = await axios.put(process.env.VUE_APP_API_URL + "consignor", data)
+    return res.data
+  },
+
   async deleteConsignor(id) {
     let res = await axios.delete(process.env.VUE_APP_API_URL + "consignor", {
       params: {
