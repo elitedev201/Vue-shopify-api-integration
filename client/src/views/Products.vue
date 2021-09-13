@@ -15,7 +15,7 @@
 
 <script>
 // @ is an alias to /src
-import ProductDatatable from "./Datatable.vue"
+import ProductDatatable from "./ProductDatatable.vue"
 export default {
   name: "Products",
   components: {

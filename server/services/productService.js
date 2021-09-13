@@ -4,6 +4,7 @@ const shopify = require("./shopify")
 const productService = {
   getAllProducts: getAllProducts,
   getProductById: getProductById,
+  getProductsByVendor: getProductsByVendor,
   setProducts: setProducts,
   updateProducts: updateProducts,
   deleteProduct: deleteProduct,
@@ -33,6 +34,19 @@ function getProductById(id) {
   return new Promise((resolve, reject) => {
     productModel
       .getProductById(product_id)
+      .then(data => {
+        resolve({ code: 200, data: data.data, shopifyData: data.shopifyData })
+      })
+      .catch(err => {
+        reject(err.message)
+      })
+  })
+}
+
+function getProductsByVendor(vendor) {
+  return new Promise((resolve, reject) => {
+    productModel
+      .getProductsByVendor(vendor)
       .then(data => {
         resolve({ code: 200, data: data.data, shopifyData: data.shopifyData })
       })

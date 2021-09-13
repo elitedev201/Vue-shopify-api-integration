@@ -18,6 +18,12 @@ const routes = [
     beforeEnter: authGuard,
   },
   {
+    path: "/products/:vendor",
+    name: "ProductsByVendor",
+    component: () => import("../views/ProductsByVendor.vue"),
+    beforeEnter: authGuard,
+  },
+  {
     path: "/create_product",
     name: "CreateProduct",
     component: () => import("../views/CreateProduct.vue"),
@@ -27,6 +33,42 @@ const routes = [
     path: "/product/:productid",
     name: "ProductDetail",
     component: () => import("../views/ProductDetail.vue"),
+    beforeEnter: authGuard,
+  },
+  {
+    path: "/payouts",
+    name: "Payouts",
+    component: () => import("../views/Payouts.vue"),
+    beforeEnter: authGuard,
+  },
+  {
+    path: "/beforepayouts",
+    name: "BeforePayouts",
+    component: () => import("../views/Payouts.vue"),
+    beforeEnter: authGuard,
+  },
+  {
+    path: "/payout/:vendor",
+    name: "PayoutDetail",
+    component: () => import("../views/PayoutDetail.vue"),
+    beforeEnter: authGuard,
+  },
+  {
+    path: "/consignors",
+    name: "Consignors",
+    component: () => import("../views/Consignors.vue"),
+    beforeEnter: authGuard,
+  },
+  {
+    path: "/create_consignor",
+    name: "CreateConsignor",
+    component: () => import("../views/CreateConsignor.vue"),
+    beforeEnter: authGuard,
+  },
+  {
+    path: "/consignor/:id",
+    name: "ConsignorDetail",
+    component: () => import("../views/ConsignorDetail.vue"),
     beforeEnter: authGuard,
   },
 ]
