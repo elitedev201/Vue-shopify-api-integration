@@ -6,14 +6,21 @@ const payoutModel = {
   getPayoutByVendor: getPayoutByVendor,
 }
 
-function getPayouts() {
+function getPayouts(flag) {
   return new Promise((resolve, reject) => {
     var request = new db.Request()
+    
+    var date = new Date()
+    var year = date.getFullYear()
+    var month = ""
 
     //get first and last date
-    var date = new Date()
-    var month = date.getMonth() + 1
-    var year = date.getFullYear()
+    if (flag == "BeforePayouts") {
+      month = date.getMonth()
+    } else {
+      month = date.getMonth() + 1
+    }
+
     const firstDate = new Date(year, month - 2, 0)
     const lastDate = new Date(year, month - 1, 1)
 
@@ -21,7 +28,7 @@ function getPayouts() {
     request.input("lastDate", db.DateTime, lastDate)
 
     let query =
-    "SELECT distinct(spfy_vendor), sum(spfy_line_item_qty) as items_sold, \
+      "SELECT distinct(spfy_vendor), sum(spfy_line_item_qty) as items_sold, \
     format((sum(spfy_line_item_qty * spfy_line_item_price)), 'C') as total_sales, defaultPercentage, \
     format(sum(spfy_line_item_qty * spfy_line_item_price * defaultPercentage/100), 'C') as net_sales from tstSpfyOrderItems items \
     inner join consignors csn on csn.qbCompany = items.spfy_vendor \

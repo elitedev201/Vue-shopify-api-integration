@@ -24,10 +24,10 @@
                 <v-btn color="primary" :href="'/products/' + company"> Active Products </v-btn>
               </v-col>
               <v-col md="4">
-                <v-btn color="primary"> Upcoming Payout </v-btn>
+                <v-btn color="primary" href="/payouts"> Upcoming Payout </v-btn>
               </v-col>
               <v-col md="4">
-                <v-btn color="primary"> Sales History </v-btn>
+                <v-btn color="primary" href="/beforepayouts"> Sales History </v-btn>
               </v-col>
             </v-row>
 

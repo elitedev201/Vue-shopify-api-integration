@@ -6,10 +6,10 @@ const payoutService = {
   getPayoutByVendor: getPayoutByVendor,
 }
 
-function getPayouts() {
+function getPayouts(flag) {
   return new Promise((resolve, reject) => {
     payoutModel
-      .getPayouts()
+      .getPayouts(flag)
       .then(data => {
         resolve({ code: 200, data })
       })

@@ -9,7 +9,7 @@ router.get("/payout", getPayoutByVendor)
 
 function getPayouts(req, res) {
   payoutService
-    .getPayouts()
+    .getPayouts(req.query.flag)
     .then(result => {
       res.json(result)
     })

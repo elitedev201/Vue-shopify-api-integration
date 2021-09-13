@@ -39,6 +39,7 @@ uploadFileToBlob = async (directoryPath, title, file) => {
 const productModel = {
   getAllProducts: getAllProducts,
   getProductById: getProductById,
+  getProductsByVendor: getProductsByVendor,
   setProducts: setProducts,
   updateProducts: updateProducts,
   deleteProduct: deleteProduct,
@@ -80,6 +81,22 @@ function getProductById(id) {
             resolve({ data: rows.recordset[0], shopifyData: product })
           }
         )
+      }
+    })
+  })
+}
+
+function getProductsByVendor(vendor) {
+  return new Promise((resolve, reject) => {
+    var request = new db.Request()
+    request.input("vendor", db.VarChar, vendor)
+    let query = "SELECT * FROM products WHERE vendor=@vendor"
+
+    request.query(query, (error, rows) => {
+      if (error) {
+        reject(error.message)
+      } else {
+        resolve({ data: rows.recordset })
       }
     })
   })

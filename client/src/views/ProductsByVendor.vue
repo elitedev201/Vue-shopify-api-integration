@@ -111,6 +111,9 @@
           </v-data-table>
         </v-card>
       </template>
+      <div class="create-footer mr-16">
+        <v-btn @click="back"> Back </v-btn>
+      </div>
     </v-col>
   </v-row>
 </template>
@@ -163,11 +166,15 @@ export default {
     async getProductsDataByVendor() {
       //Get accessToken
       // const accessToken = await this.$auth.getTokenSilently()
-      const vendor = this.$route.paramas.vendor
+      const vendor = this.$route.params.vendor
       // Use the productService to call the getProducts() method
       productService.getProductsByVendor(vendor).then(res => {
         this.productList = res.data
       })
+    },
+
+    back() {
+      window.history.back()
     },
   },
 }

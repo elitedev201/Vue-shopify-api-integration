@@ -83,11 +83,11 @@ export default {
 
   methods: {
     async getPayoutData() {
-
+      const flag = this.$route.name
       //Get accessToken
       const accessToken = await this.$auth.getTokenSilently()
       // Use the eventService to call the getEvents() method
-      payoutService.getPayouts(accessToken).then(res => {
+      payoutService.getPayouts(accessToken, flag).then(res => {
         this.payoutList = res.data
       })
     },

@@ -9,6 +9,9 @@
           </v-btn> -->
       </div>
       <payout-datatable class="custom-spacing"></payout-datatable>
+      <div class="create-footer mr-16 mb-3">
+        <v-btn @click="back"> Back </v-btn>
+      </div>
     </v-col>
   </v-row>
 </template>
@@ -23,6 +26,11 @@ export default {
   },
   setup() {
     return {}
+  },
+  methods: {
+    back() {
+      window.history.back()
+    },
   },
 }
 </script>

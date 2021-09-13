@@ -42,6 +42,12 @@ const routes = [
     beforeEnter: authGuard,
   },
   {
+    path: "/beforepayouts",
+    name: "BeforePayouts",
+    component: () => import("../views/Payouts.vue"),
+    beforeEnter: authGuard,
+  },
+  {
     path: "/payout/:vendor",
     name: "PayoutDetail",
     component: () => import("../views/PayoutDetail.vue"),
