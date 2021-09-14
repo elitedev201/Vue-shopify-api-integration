@@ -1,0 +1,10 @@
+{
+    "azureFunctions.deploySubpath": "api",
+    "azureFunctions.postDeployTask": "npm install (functions)",
+    "azureFunctions.projectLanguage": "JavaScript",
+    "azureFunctions.projectRuntime": "~3",
+    "debug.internalConsoleOptions": "neverOpen",
+    "azureFunctions.preDeployTask": "npm prune (functions)",
+    "appService.defaultWebAppToDeploy": "/subscriptions/45a29aab-8b41-4d5a-8809-08ed170c5b7d/resourceGroups/appsvc_linux_centralus_premium/providers/Microsoft.Web/sites/tconsign-appservice",
+    "appService.deploySubpath": "."
+}
